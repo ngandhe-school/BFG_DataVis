@@ -1,3 +1,0 @@
-[GET] http://localhost:5173/data/koi_sample.json => [200] OK
-[GET] http://localhost:5173/model/model-metadata.json => [200] OK
-[GET] http://localhost:5173/model/model.json => [200] OK

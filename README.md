@@ -1,53 +1,35 @@
-# Stellar Fingerprints (Phase 1+ Experience)
+# Stellar Fingerprints
 
-Stellar Fingerprints is a browser-only space data story app built on real NASA Kepler KOI records.  
-It combines cinematic Three.js rendering, synchronized D3 transit visualization, and in-browser ML inference.
+Stellar Fingerprints is a browser-based exoplanet storytelling app built on NASA Kepler KOI data.  
+It combines a React UI shell with a runtime engine for Three.js visuals, D3-based transit views, and in-browser TensorFlow.js inference.
 
-## What is improved
+## Features
 
-- **Stronger data storytelling:** intro KPI cards and mission insight bullets summarize trends in the currently loaded dataset (live, cached, or fallback).
-- **Exceptional 3D UI pass:** upgraded star scene with animated stellar shader, nebula backdrop, plasma shell, dual orbit rings, moving orbit arc, asteroid belt, comet with dynamic tail, moon system, galaxy sprites, shockwave pulses, dust field, and mouse-parallax camera movement.
-- **Transit synchronization controls:** interactive timeline scrubber, pause/play, speed control, and phase chips synchronized between 3D planet motion and light-curve chart.
-- **Clearer scientific framing:** per-star transit narrative text translates raw depth/period/duration numbers into understandable plain-language story cues.
-- **Exploration-focused selection cards:** KOI cards now expose signal style (subtle/moderate/high-contrast dip) and orbit pacing.
-- **Hackathon storytelling layer:** guided story mode, period-distribution mini chart, uncertainty warning text, and explainable verdict reasoning bullets.
-- **3D throughout the site:** persistent full-page Three.js cosmos background plus mini 3D modules embedded in Intro, Star Select, AI Verdict, and Draw Mode.
+- Interactive multi-screen mission flow for exploration and explanation.
+- Synchronized 3D transit scene and light-curve behavior.
+- AI verdict narrative with uncertainty messaging.
+- Resilient data loading path (live API -> local fallback).
 
-## Main files
-
-- `src/App.jsx`: React app shell composed from reusable screen components.
-- `src/components/`: reusable layout/screen React components.
-- `src/hooks/useLegacyStellarApp.js`: one-time legacy engine bootstrap hook.
-- `app.js`: runtime engine (state machine, Three.js scenes, D3, TensorFlow.js inference).
-- `data/koi_sample.json`: bundled KOI fallback sample for offline demo reliability.
-- `model/model-metadata.json`: feature/class/scaler contract used by browser preprocessing.
-- `training/train_koi_model.py`: offline training script.
-- `training/README.md`: model preparation and conversion instructions.
-
-## Run locally (React + Vite)
+## Quick Start
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open:
+App URL: `http://localhost:5173`
 
-- `http://localhost:5173`
+## Build
 
-## Playwright CLI integration
+```bash
+npm run build
+npm run preview
+```
 
-This repo now includes local `@playwright/cli` integration for browser automation and agent workflows.
-
-Setup:
+## Playwright CLI (optional)
 
 ```bash
 npm run pw:skills
-```
-
-Common commands:
-
-```bash
 npm run pw:open
 npm run pw:snapshot
 npm run pw:screenshot
@@ -56,27 +38,37 @@ npm run pw:network
 npm run pw:close
 ```
 
-Notes:
-- Default session name is `sf` (shortened to avoid macOS unix socket path length issues).
-- Default Playwright CLI config lives at `.playwright/cli.config.json`.
-- Project-wide agent guidance is in `.cursor/rules/playwright-cli-workflow.mdc`.
-
-Troubleshooting (macOS):
-- If you see `listen EINVAL ... .sock`, run:
+Fallback for macOS socket path issues:
 
 ```bash
 npm run pw:open:fallback
 ```
 
-## Runtime behavior
+## Project Structure
 
-1. Tries live KOI query from NASA Exoplanet Archive TAP.
-2. If live fetch fails, falls back to cached local payload.
-3. If cache is missing, uses `data/koi_sample.json`.
-4. Attempts to load `model/model.json`; if unavailable, uses heuristic inference fallback so demo flow remains uninterrupted.
+```text
+BFG_DataVis/
+├── src/                         # React app shell and styles
+│   ├── components/
+│   ├── hooks/
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── styles.css
+├── app.js                       # Runtime engine (Three.js, D3, TF.js, state machine)
+├── data/                        # Local fallback dataset
+├── model/                       # Model metadata / TF.js model artifacts
+├── training/                    # Offline training pipeline
+├── docs/
+│   ├── planning/                # Planning and blueprint docs
+│   └── legacy/                  # Archived legacy entry files
+├── index.html
+├── vite.config.js
+└── package.json
+```
 
-## Suggested next upgrades
+## Runtime Behavior
 
-1. Add voiceover-style scripted narration synced to guided story chapters.
-2. Include mission-history overlays (yearly discovery context) in the period-distribution chart.
-3. Add mobile-specific adaptive 3D quality presets for older devices.
+1. Attempts live NASA Exoplanet Archive KOI fetch.
+2. Falls back to bundled sample data when needed.
+3. Loads model metadata and attempts TF.js model load.
+4. Uses heuristic fallback when model artifacts are unavailable.
