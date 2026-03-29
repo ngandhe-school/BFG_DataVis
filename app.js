@@ -45,6 +45,7 @@ const LIVE_QUERY =
   'select+top+120+kepid,kepoi_name,koi_disposition,koi_period,koi_depth,koi_duration,koi_prad,koi_teq,koi_steff,koi_srad,koi_score' +
   '+from+cumulative+where+koi_disposition+is+not+null+order+by+koi_score+desc&format=json';
 const ENABLE_LIVE_API = import.meta.env.VITE_ENABLE_LIVE_API === 'true';
+const STATIC_BASE = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
 
 const DEFAULT_METADATA = {
   feature_order: FEATURE_ORDER,
@@ -54,6 +55,27 @@ const DEFAULT_METADATA = {
     stds: [45.0, 900.0, 3.4, 2.0, 350.0, 800.0, 0.5],
   },
 };
+
+function getStaticUrl(path) {
+  const normalized = String(path || '').replace(/^\/+/, '');
+  return `${STATIC_BASE}${normalized}`;
+}
+
+async function fetchJsonOrThrow(path, label) {
+  const url = getStaticUrl(path);
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`${label} request failed (${response.status}) at ${url}`);
+  }
+
+  const text = await response.text();
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    const preview = text.slice(0, 120).replace(/\s+/g, ' ').trim();
+    throw new Error(`${label} returned invalid JSON at ${url}. Preview: ${preview}`);
+  }
+}
 
 const state = {
   activeScreen: SCREENS.INTRO,
@@ -1300,8 +1322,7 @@ async function loadKoiData() {
   }
 
   if (!ENABLE_LIVE_API) {
-    const fallbackResponse = await fetch('./data/koi_sample.json');
-    const fallbackPayload = await fallbackResponse.json();
+    const fallbackPayload = await fetchJsonOrThrow('data/koi_sample.json', 'Fallback KOI data');
     state.koiRecords = fallbackPayload.map(normalizeKoi);
     state.dataSource = 'fallback';
     return;
@@ -1327,8 +1348,7 @@ async function loadKoiData() {
     localStorage.setItem('stellar-fingerprints-koi-cache', JSON.stringify(rows));
     localStorage.setItem('stellar-fingerprints-koi-cache-ts', String(Date.now()));
   } catch (liveError) {
-    const fallbackResponse = await fetch('./data/koi_sample.json');
-    const fallbackPayload = await fallbackResponse.json();
+    const fallbackPayload = await fetchJsonOrThrow('data/koi_sample.json', 'Fallback KOI data');
     state.koiRecords = fallbackPayload.map(normalizeKoi);
     state.dataSource = 'fallback';
     console.warn('Live API unavailable. Using fallback dataset.', liveError);
@@ -2648,12 +2668,9 @@ async function ensureModelLoaded() {
   setStatusPill();
 
   try {
-    const metadataResponse = await fetch('./model/model-metadata.json');
-    if (metadataResponse.ok) {
-      state.metadata = await metadataResponse.json();
-    }
+    state.metadata = await fetchJsonOrThrow('model/model-metadata.json', 'Model metadata');
 
-    const model = await tf.loadLayersModel('./model/model.json');
+    const model = await tf.loadLayersModel(getStaticUrl('model/model.json'));
     state.model = model;
     state.modelStatus = 'ready';
   } catch (error) {
