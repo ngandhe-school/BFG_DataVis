@@ -121,6 +121,16 @@ const dom = {
   biasScatter: document.getElementById('bias-scatter'),
   datasetKeyFinding: document.getElementById('dataset-key-finding'),
   sizeComparison: document.getElementById('size-comparison'),
+  drawCanvas: document.getElementById('draw-lightcurve-canvas'),
+  drawResetButton: document.getElementById('btn-draw-reset'),
+  drawAnalyzeButton: document.getElementById('btn-draw-analyze'),
+  drawResultPanel: document.getElementById('draw-result-panel'),
+  hzTempSlider: document.getElementById('hz-temp-slider'),
+  hzRadiusSlider: document.getElementById('hz-radius-slider'),
+  hzTempValue: document.getElementById('hz-temp-value'),
+  hzRadiusValue: document.getElementById('hz-radius-value'),
+  hzStripContainer: document.getElementById('hz-strip-container'),
+  hzCounter: document.getElementById('hz-counter'),
   cameraFocusButton: document.getElementById('btn-camera-focus'),
   cameraCinematicButton: document.getElementById('btn-camera-cinematic'),
   ambienceSlider: document.getElementById('slider-ambience'),
@@ -696,6 +706,334 @@ function renderDatasetStoryCharts() {
   renderDispositionChart(state.koiRecords);
   renderBiasScatter(state.koiRecords);
   renderDatasetKeyFinding(state.koiRecords);
+}
+
+let drawState = { points: [], isDrawing: false };
+
+function initDrawCanvas() {
+  const canvas = dom.drawCanvas;
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  resetDrawCanvas(ctx, canvas);
+
+  function getPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
+  }
+
+  function onStart(e) {
+    e.preventDefault();
+    drawState.isDrawing = true;
+    drawState.points = [];
+    const pos = getPos(e);
+    drawState.points.push(pos);
+  }
+
+  function onMove(e) {
+    if (!drawState.isDrawing) return;
+    e.preventDefault();
+    const pos = getPos(e);
+    drawState.points.push(pos);
+    redrawCanvas(ctx, canvas);
+  }
+
+  function onEnd(e) {
+    if (!drawState.isDrawing) return;
+    e.preventDefault();
+    drawState.isDrawing = false;
+    redrawCanvas(ctx, canvas);
+  }
+
+  canvas.addEventListener('mousedown', onStart);
+  canvas.addEventListener('mousemove', onMove);
+  canvas.addEventListener('mouseup', onEnd);
+  canvas.addEventListener('mouseleave', onEnd);
+  canvas.addEventListener('touchstart', onStart, { passive: false });
+  canvas.addEventListener('touchmove', onMove, { passive: false });
+  canvas.addEventListener('touchend', onEnd, { passive: false });
+
+  if (dom.drawResetButton) {
+    dom.drawResetButton.addEventListener('click', () => {
+      drawState.points = [];
+      resetDrawCanvas(ctx, canvas);
+      if (dom.drawResultPanel) dom.drawResultPanel.innerHTML = '';
+    });
+  }
+
+  if (dom.drawAnalyzeButton) {
+    dom.drawAnalyzeButton.addEventListener('click', () => {
+      analyzeDrawing();
+    });
+  }
+}
+
+function resetDrawCanvas(ctx, canvas) {
+  const w = canvas.width;
+  const h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+
+  ctx.fillStyle = 'rgba(6, 12, 31, 0.6)';
+  ctx.fillRect(0, 0, w, h);
+
+  const baseline = h * 0.25;
+  ctx.strokeStyle = 'rgba(122, 184, 255, 0.35)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(0, baseline);
+  ctx.lineTo(w, baseline);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.fillStyle = 'rgba(122, 184, 255, 0.25)';
+  ctx.font = '11px Satoshi, system-ui, sans-serif';
+  ctx.fillText('baseline (no transit)', 8, baseline - 6);
+  ctx.fillText('Draw a dip below this line ↓', w / 2 - 80, baseline + 18);
+}
+
+function redrawCanvas(ctx, canvas) {
+  resetDrawCanvas(ctx, canvas);
+  const pts = drawState.points;
+  if (pts.length < 2) return;
+
+  ctx.strokeStyle = '#3edbff';
+  ctx.lineWidth = 2.5;
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x, pts[0].y);
+  for (let i = 1; i < pts.length; i++) {
+    ctx.lineTo(pts[i].x, pts[i].y);
+  }
+  ctx.stroke();
+
+  ctx.fillStyle = 'rgba(62, 219, 255, 0.08)';
+  const baseline = canvas.height * 0.25;
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x, baseline);
+  for (let i = 0; i < pts.length; i++) {
+    ctx.lineTo(pts[i].x, Math.max(pts[i].y, baseline));
+  }
+  ctx.lineTo(pts[pts.length - 1].x, baseline);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function analyzeDrawing() {
+  const panel = dom.drawResultPanel;
+  if (!panel) return;
+  const pts = drawState.points;
+
+  if (pts.length < 10) {
+    panel.innerHTML = '<p class="caption">Draw a dip on the canvas first, then click Analyze.</p>';
+    return;
+  }
+
+  const canvas = dom.drawCanvas;
+  const baseline = canvas.height * 0.25;
+  const canvasW = canvas.width;
+
+  let maxDipDepth = 0;
+  let dipStartX = canvasW;
+  let dipEndX = 0;
+
+  pts.forEach((p) => {
+    const dipBelow = p.y - baseline;
+    if (dipBelow > 5) {
+      if (dipBelow > maxDipDepth) maxDipDepth = dipBelow;
+      if (p.x < dipStartX) dipStartX = p.x;
+      if (p.x > dipEndX) dipEndX = p.x;
+    }
+  });
+
+  if (maxDipDepth < 5) {
+    panel.innerHTML = '<p class="caption">No transit dip detected. Try drawing below the baseline.</p>';
+    return;
+  }
+
+  const depthFrac = clamp(maxDipDepth / (canvas.height * 0.7), 0, 1);
+  const widthFrac = clamp((dipEndX - dipStartX) / canvasW, 0, 1);
+
+  const estDepthPpm = Math.round(depthFrac * 30000);
+  const estDuration = Math.round(widthFrac * 24 * 10) / 10;
+  const estPrad = Math.max(0.3, Math.sqrt(estDepthPpm / 1000) * 1.8);
+
+  let planetType, typeColor;
+  if (estPrad < 1.3) { planetType = 'Earth-like'; typeColor = '#4ecdc4'; }
+  else if (estPrad < 2.2) { planetType = 'Super-Earth'; typeColor = '#7ab8ff'; }
+  else if (estPrad < 5) { planetType = 'Mini-Neptune'; typeColor = '#a78bfa'; }
+  else if (estPrad < 10) { planetType = 'Neptune-class'; typeColor = '#60a5fa'; }
+  else { planetType = 'Gas Giant'; typeColor = '#f59e0b'; }
+
+  const fakeFeatures = [
+    15, estDepthPpm, estDuration,
+    estPrad, 600, 5600, 1.0,
+  ];
+  const probs = heuristicProbabilities(fakeFeatures);
+  const classLabels = ['Candidate', 'Confirmed', 'False Positive'];
+  const classColors = ['#7ab8ff', '#4ecdc4', '#ff7979'];
+  const topIdx = probs.indexOf(Math.max(...probs));
+
+  panel.innerHTML = `
+    <div class="draw-result-grid">
+      <div class="draw-result-card">
+        <span class="draw-result-label">Planet Type</span>
+        <strong class="draw-planet-type" style="color: ${typeColor}">${planetType}</strong>
+        <span class="caption">${estPrad.toFixed(1)}x Earth radius</span>
+      </div>
+      <div class="draw-result-card">
+        <span class="draw-result-label">Transit Depth</span>
+        <strong>${estDepthPpm.toLocaleString()} ppm</strong>
+        <span class="caption">${humanScale('koi_depth', estDepthPpm)}</span>
+      </div>
+      <div class="draw-result-card">
+        <span class="draw-result-label">Est. Duration</span>
+        <strong>${estDuration} hours</strong>
+        <span class="caption">${humanScale('koi_duration', estDuration)}</span>
+      </div>
+      <div class="draw-result-card">
+        <span class="draw-result-label">AI Verdict</span>
+        <strong style="color: ${classColors[topIdx]}">${classLabels[topIdx]}</strong>
+        <span class="caption">${(probs[topIdx] * 100).toFixed(0)}% confidence</span>
+      </div>
+    </div>
+    <div class="draw-mini-meter">
+      ${probs.map((p, i) => `
+        <div class="meter-row">
+          <span class="meter-label">${classLabels[i]}</span>
+          <div class="meter-track">
+            <div class="meter-fill" style="width: ${(p * 100).toFixed(1)}%; background: ${classColors[i]}"></div>
+          </div>
+          <span class="meter-value">${(p * 100).toFixed(1)}%</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function initHabitableZone() {
+  if (!dom.hzTempSlider || !dom.hzRadiusSlider || !dom.hzStripContainer) return;
+
+  renderHabitableZone();
+
+  dom.hzTempSlider.addEventListener('input', () => {
+    if (dom.hzTempValue) dom.hzTempValue.textContent = `${dom.hzTempSlider.value} K`;
+    renderHabitableZone();
+  });
+
+  dom.hzRadiusSlider.addEventListener('input', () => {
+    if (dom.hzRadiusValue) dom.hzRadiusValue.textContent = `${parseFloat(dom.hzRadiusSlider.value).toFixed(2)} R☉`;
+    renderHabitableZone();
+  });
+}
+
+function renderHabitableZone() {
+  const container = dom.hzStripContainer;
+  if (!container) return;
+  container.innerHTML = '';
+
+  const teff = parseFloat(dom.hzTempSlider?.value || 5778);
+  const rstar = parseFloat(dom.hzRadiusSlider?.value || 1.0);
+
+  const luminosity = Math.pow(rstar, 2) * Math.pow(teff / 5778, 4);
+  const hzInnerAU = 0.95 * Math.sqrt(luminosity);
+  const hzOuterAU = 1.37 * Math.sqrt(luminosity);
+
+  const maxAU = Math.max(3.0, hzOuterAU * 2.2);
+  const width = Math.max(400, container.clientWidth || 500);
+  const height = 160;
+  const margin = { top: 32, right: 20, bottom: 36, left: 20 };
+  const iw = width - margin.left - margin.right;
+  const ih = height - margin.top - margin.bottom;
+
+  const svg = d3.select(container).append('svg').attr('width', width).attr('height', height);
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear().domain([0, maxAU]).range([0, iw]);
+
+  g.append('rect').attr('x', 0).attr('y', 0).attr('width', iw).attr('height', ih)
+    .attr('fill', 'rgba(120, 150, 205, 0.06)').attr('rx', 6);
+
+  g.append('rect')
+    .attr('x', x(0)).attr('y', 0)
+    .attr('width', Math.max(0, x(hzInnerAU))).attr('height', ih)
+    .attr('fill', 'rgba(255, 100, 80, 0.12)').attr('rx', 4);
+
+  g.append('rect')
+    .attr('x', x(hzInnerAU)).attr('y', 0)
+    .attr('width', Math.max(0, x(hzOuterAU) - x(hzInnerAU))).attr('height', ih)
+    .attr('fill', 'rgba(78, 205, 196, 0.18)').attr('rx', 4);
+
+  g.append('rect')
+    .attr('x', x(hzOuterAU)).attr('y', 0)
+    .attr('width', Math.max(0, iw - x(hzOuterAU))).attr('height', ih)
+    .attr('fill', 'rgba(100, 140, 255, 0.1)').attr('rx', 4);
+
+  g.append('text').attr('x', x(hzInnerAU / 2)).attr('y', -8)
+    .attr('text-anchor', 'middle').attr('fill', '#ff7979').attr('font-size', 10)
+    .attr('font-family', 'Satoshi, sans-serif').text('Too Hot');
+
+  const hzMid = (hzInnerAU + hzOuterAU) / 2;
+  g.append('text').attr('x', x(hzMid)).attr('y', -8)
+    .attr('text-anchor', 'middle').attr('fill', '#4ecdc4').attr('font-size', 10)
+    .attr('font-family', 'Satoshi, sans-serif').text('Habitable Zone');
+
+  const coldMid = Math.min((hzOuterAU + maxAU) / 2, maxAU - 0.2);
+  g.append('text').attr('x', x(coldMid)).attr('y', -8)
+    .attr('text-anchor', 'middle').attr('fill', '#7ab8ff').attr('font-size', 10)
+    .attr('font-family', 'Satoshi, sans-serif').text('Too Cold');
+
+  g.append('g').attr('transform', `translate(0,${ih})`).call(
+    d3.axisBottom(x).ticks(6).tickFormat((d) => `${d.toFixed(1)} AU`),
+  ).selectAll('text').attr('fill', '#b7c8ef').style('font-size', '10px');
+
+  const rows = state.koiRecords;
+  if (!rows.length) return;
+
+  const tooltip = d3.select(container).append('div').attr('class', 'hz-tooltip');
+
+  const colorMap = { CONFIRMED: '#4ecdc4', CANDIDATE: '#7ab8ff', 'FALSE POSITIVE': '#ff7979' };
+  let inZoneCount = 0;
+
+  rows.forEach((r) => {
+    const starLum = Math.pow(r.koi_srad, 2) * Math.pow(r.koi_steff / 5778, 4);
+    const planetAU = estimateAU(r.koi_period, r.koi_steff, r.koi_srad);
+    if (planetAU > maxAU) return;
+
+    const jitter = (Math.random() - 0.5) * ih * 0.8;
+    const cy = ih / 2 + jitter;
+    const cx = x(planetAU);
+    const inHz = planetAU >= hzInnerAU && planetAU <= hzOuterAU;
+    if (inHz) inZoneCount++;
+
+    g.append('circle')
+      .attr('cx', cx).attr('cy', cy).attr('r', inHz ? 4.5 : 3)
+      .attr('fill', colorMap[r.koi_disposition] || '#7ab8ff')
+      .attr('opacity', inHz ? 0.85 : 0.45)
+      .attr('stroke', inHz ? '#fff' : 'none')
+      .attr('stroke-width', inHz ? 1 : 0)
+      .on('mouseenter', (event) => {
+        tooltip.style('display', 'block')
+          .style('left', `${event.offsetX + 10}px`)
+          .style('top', `${event.offsetY - 28}px`)
+          .html(`<strong>${r.kepoi_name}</strong><br>${r.koi_disposition} · ${Math.round(r.koi_teq)} K`);
+      })
+      .on('mouseleave', () => { tooltip.style('display', 'none'); });
+  });
+
+  if (dom.hzCounter) {
+    dom.hzCounter.textContent = `${inZoneCount} of ${rows.length} planets fall within the habitable zone for these star parameters.`;
+  }
+}
+
+function estimateAU(periodDays, steff, srad) {
+  const mstar = Math.pow(srad, 0.8);
+  const aAU = Math.pow((periodDays / 365.25), 2 / 3) * Math.pow(mstar, 1 / 3);
+  return clamp(aAU, 0.01, 20);
 }
 
 function cardTemplate(koi) {
@@ -2594,6 +2932,8 @@ async function initialize() {
   renderMissionInsights();
   renderIntroTicker();
   renderDatasetStoryCharts();
+  initDrawCanvas();
+  initHabitableZone();
   const initialTint = state.koiRecords[0]?.starColor || '#8fb8ff';
   ambient3dRuntime?.tint(initialTint);
   setStatusPill();

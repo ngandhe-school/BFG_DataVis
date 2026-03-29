@@ -1,6 +1,8 @@
 node_modules
 .vite/
 dist/
+.next/
+.playwright/
 .playwright-cli/
 .cursor/
 .claude/
