@@ -113,8 +113,14 @@ const dom = {
   starWhy: document.getElementById('star-why'),
   dossierFieldGrid: document.getElementById('dossier-field-grid'),
   dataLegendList: document.getElementById('data-legend-list'),
+  confidenceMeter: document.getElementById('confidence-meter'),
+  verdictCounterfactual: document.getElementById('verdict-counterfactual'),
   introFactTicker: document.getElementById('intro-fact-ticker'),
   leaderboardList: document.getElementById('leaderboard-list'),
+  dispositionChart: document.getElementById('disposition-chart'),
+  biasScatter: document.getElementById('bias-scatter'),
+  datasetKeyFinding: document.getElementById('dataset-key-finding'),
+  sizeComparison: document.getElementById('size-comparison'),
   cameraFocusButton: document.getElementById('btn-camera-focus'),
   cameraCinematicButton: document.getElementById('btn-camera-cinematic'),
   ambienceSlider: document.getElementById('slider-ambience'),
@@ -132,6 +138,7 @@ let threeRuntime = null;
 let chartRuntime = null;
 let ambient3dRuntime = null;
 let revealObserver = null;
+let tickerIntervalId = null;
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
@@ -140,6 +147,52 @@ function clamp(value, min, max) {
 function safeNumber(value, fallback = 0) {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function humanScale(field, value) {
+  switch (field) {
+    case 'koi_depth': {
+      const pct = (value / 1_000_000) * 100;
+      if (value > 10000) return `Like briefly dimming a room light by ${pct.toFixed(1)}%`;
+      if (value > 2000) return `A noticeable flicker — ${pct.toFixed(2)}% of the star's light blocked`;
+      return `A faint shadow — only ${pct.toFixed(3)}% of starlight blocked`;
+    }
+    case 'koi_period': {
+      if (value < 1) return `Less than a day — this world whips around its star in hours`;
+      if (value < 10) return `About ${Math.round(value)} days per orbit — faster than Mercury`;
+      if (value < 90) return `Roughly ${Math.round(value)} days — comparable to an inner solar system planet`;
+      if (value < 400) return `About ${(value / 30).toFixed(0)} months per orbit — a slow, distant world`;
+      return `Over a year per orbit — a cold, far-flung world`;
+    }
+    case 'koi_prad': {
+      if (value < 1.2) return `Close to Earth-sized`;
+      if (value < 2) return `A super-Earth — ${value.toFixed(1)}x Earth's radius`;
+      if (value < 4) return `Mini-Neptune territory — ${value.toFixed(1)}x Earth`;
+      if (value < 10) return `Neptune-class — ${value.toFixed(1)}x Earth's radius`;
+      return `Gas giant — ${value.toFixed(0)}x Earth's radius`;
+    }
+    case 'koi_teq': {
+      if (value < 250) return `Freezing — colder than Earth's poles`;
+      if (value < 320) return `Temperate zone — potentially habitable range`;
+      if (value < 500) return `Hot — like Venus or hotter`;
+      if (value < 1000) return `Scorching — hotter than any oven`;
+      return `Extreme — hot enough to melt rock`;
+    }
+    case 'koi_duration': {
+      if (value < 2) return `A brief shadow — transit lasts under 2 hours`;
+      if (value < 6) return `A ${value.toFixed(1)}-hour crossing`;
+      return `A long transit — ${value.toFixed(1)} hours to cross the star's face`;
+    }
+    case 'koi_steff': {
+      if (value < 3700) return `Cool red dwarf`;
+      if (value < 5200) return `Warm orange star`;
+      if (value < 6000) return `Sun-like yellow star`;
+      if (value < 7500) return `Hot white star`;
+      return `Very hot blue-white star`;
+    }
+    default:
+      return '';
+  }
 }
 
 function getSpectralClass(temperature) {
@@ -174,6 +227,7 @@ function getSpectralColor(temperature) {
 }
 
 function normalizeKoi(raw) {
+  const hasScore = raw.koi_score != null && raw.koi_score !== '';
   const normalized = {
     kepid: safeNumber(raw.kepid, -1),
     kepoi_name: String(raw.kepoi_name || 'Unknown KOI'),
@@ -185,7 +239,7 @@ function normalizeKoi(raw) {
     koi_teq: clamp(safeNumber(raw.koi_teq, 650), 120, 4000),
     koi_steff: clamp(safeNumber(raw.koi_steff, 5600), 2500, 45000),
     koi_srad: clamp(safeNumber(raw.koi_srad, 1), 0.1, 20),
-    koi_score: clamp(safeNumber(raw.koi_score, 0.5), 0, 1),
+    koi_score: hasScore ? clamp(safeNumber(raw.koi_score, 0), 0, 1) : null,
   };
   normalized.spectralClass = getSpectralClass(normalized.koi_steff);
   normalized.starColor = getSpectralColor(normalized.koi_steff);
@@ -377,16 +431,41 @@ function buildDatasetInsights(rows) {
   };
 }
 
+function animateCounter(element, text, duration = 800) {
+  const match = text.match(/^([\d.]+)/);
+  if (!match) {
+    element.textContent = text;
+    return;
+  }
+  const targetNum = parseFloat(match[1]);
+  const suffix = text.slice(match[0].length);
+  const isFloat = match[1].includes('.');
+  const start = performance.now();
+
+  function step(now) {
+    const progress = clamp((now - start) / duration, 0, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = targetNum * eased;
+    element.textContent = (isFloat ? current.toFixed(1) : String(Math.round(current))) + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
 function renderMissionInsights() {
   const insight = buildDatasetInsights(state.koiRecords);
   dom.heroStory.textContent = insight.storyLine;
-  dom.heroCoverage.textContent = insight.coverageLine;
-  dom.heroConfirmed.textContent = insight.confirmedLine;
+  animateCounter(dom.heroCoverage, insight.coverageLine, 1000);
+  animateCounter(dom.heroConfirmed, insight.confirmedLine, 1200);
   dom.insightList.innerHTML = insight.bullets.map((bullet) => `<li><strong>Insight:</strong> ${bullet}</li>`).join('');
 }
 
 function renderIntroTicker() {
   if (!dom.introFactTicker) return;
+  if (tickerIntervalId) {
+    clearInterval(tickerIntervalId);
+    tickerIntervalId = null;
+  }
   const rows = state.koiRecords;
   if (!rows.length) {
     dom.introFactTicker.textContent = 'Waiting for dataset...';
@@ -398,14 +477,18 @@ function renderIntroTicker() {
   const facts = [
     `Hottest world in this sample: ${hottest.kepoi_name} at ${Math.round(hottest.koi_teq)} K.`,
     `Deepest transit signature: ${deepest.kepoi_name} at ${Math.round(deepest.koi_depth)} ppm.`,
-    `Longest orbital period currently loaded: ${longest.kepoi_name} (${longest.koi_period.toFixed(1)} days).`,
+    `Longest orbital period loaded: ${longest.kepoi_name} (${longest.koi_period.toFixed(1)} days).`,
   ];
   let idx = 0;
   dom.introFactTicker.textContent = facts[0];
-  window.setInterval(() => {
+  tickerIntervalId = setInterval(() => {
     idx = (idx + 1) % facts.length;
-    dom.introFactTicker.textContent = facts[idx];
-  }, 3600);
+    dom.introFactTicker.classList.add('ticker-fade');
+    setTimeout(() => {
+      dom.introFactTicker.textContent = facts[idx];
+      dom.introFactTicker.classList.remove('ticker-fade');
+    }, 400);
+  }, 5500);
 }
 
 function renderLeaderboard(rows) {
@@ -414,7 +497,12 @@ function renderLeaderboard(rows) {
     dom.leaderboardList.innerHTML = '<p class="caption">No leaderboard data.</p>';
     return;
   }
-  const top = [...rows].sort((a, b) => b.koi_score - a.koi_score).slice(0, 5);
+  const scored = rows.filter((r) => r.koi_score != null);
+  const top = [...scored].sort((a, b) => b.koi_score - a.koi_score).slice(0, 5);
+  if (!top.length) {
+    dom.leaderboardList.innerHTML = '<p class="caption">No scored KOIs in current filter.</p>';
+    return;
+  }
   dom.leaderboardList.innerHTML = top
     .map(
       (row, index) => `
@@ -422,7 +510,7 @@ function renderLeaderboard(rows) {
         <div>
           <strong>#${index + 1} ${row.kepoi_name}</strong>
           <br />
-          <small>${row.koi_disposition} | score ${row.koi_score.toFixed(2)}</small>
+          <small>${row.koi_disposition} · score ${row.koi_score.toFixed(2)}</small>
         </div>
         <button class="secondary" data-quick-select="${row.kepoi_name}">Inspect</button>
       </div>
@@ -506,12 +594,116 @@ function renderPeriodDistribution(rows) {
     .style('font-size', '10px');
 }
 
+function renderDispositionChart(rows) {
+  if (!dom.dispositionChart) return;
+  dom.dispositionChart.innerHTML = '';
+  if (!rows.length) return;
+
+  const counts = { CONFIRMED: 0, CANDIDATE: 0, 'FALSE POSITIVE': 0 };
+  rows.forEach((r) => { counts[r.koi_disposition] = (counts[r.koi_disposition] || 0) + 1; });
+  const total = rows.length;
+  const entries = [
+    { label: 'Confirmed', count: counts.CONFIRMED, color: '#4ecdc4' },
+    { label: 'Candidate', count: counts.CANDIDATE, color: '#7ab8ff' },
+    { label: 'False Positive', count: counts['FALSE POSITIVE'], color: '#ff7979' },
+  ];
+
+  const barWidth = 320;
+  const barHeight = 28;
+  const gap = 14;
+  const svgH = entries.length * (barHeight + gap + 18) + 10;
+
+  const svg = d3.select(dom.dispositionChart).append('svg')
+    .attr('width', barWidth + 80)
+    .attr('height', svgH);
+
+  entries.forEach((entry, i) => {
+    const y = i * (barHeight + gap + 18) + 8;
+    const pct = entry.count / total;
+    svg.append('text').attr('x', 0).attr('y', y).attr('fill', '#c8d9f7')
+      .attr('font-size', 12).attr('font-family', 'Satoshi, sans-serif')
+      .text(`${entry.label} — ${entry.count} (${(pct * 100).toFixed(1)}%)`);
+    svg.append('rect').attr('x', 0).attr('y', y + 6).attr('width', barWidth)
+      .attr('height', barHeight).attr('rx', 4).attr('fill', 'rgba(120, 150, 205, 0.12)');
+    svg.append('rect').attr('x', 0).attr('y', y + 6).attr('width', Math.max(2, barWidth * pct))
+      .attr('height', barHeight).attr('rx', 4).attr('fill', entry.color).attr('opacity', 0.8);
+  });
+}
+
+function renderBiasScatter(rows) {
+  if (!dom.biasScatter) return;
+  dom.biasScatter.innerHTML = '';
+  if (!rows.length) return;
+
+  const width = Math.max(320, dom.biasScatter.clientWidth || 380);
+  const height = 240;
+  const margin = { top: 14, right: 18, bottom: 36, left: 52 };
+  const iw = width - margin.left - margin.right;
+  const ih = height - margin.top - margin.bottom;
+
+  const svg = d3.select(dom.biasScatter).append('svg').attr('width', width).attr('height', height);
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLog().domain([0.3, 1200]).range([0, iw]).clamp(true);
+  const y = d3.scaleLog().domain([30, 80000]).range([ih, 0]).clamp(true);
+
+  g.append('g').attr('transform', `translate(0,${ih})`).call(d3.axisBottom(x).ticks(5, '~s'))
+    .selectAll('text').attr('fill', '#b7c8ef').style('font-size', '10px');
+  g.append('g').call(d3.axisLeft(y).ticks(4, '~s'))
+    .selectAll('text').attr('fill', '#b7c8ef').style('font-size', '10px');
+
+  g.append('text').attr('x', iw / 2).attr('y', ih + 30).attr('text-anchor', 'middle')
+    .attr('fill', '#8ea6ce').attr('font-size', 11).text('Orbital Period (days)');
+  g.append('text').attr('transform', 'rotate(-90)').attr('x', -ih / 2).attr('y', -38)
+    .attr('text-anchor', 'middle').attr('fill', '#8ea6ce').attr('font-size', 11).text('Transit Depth (ppm)');
+
+  const colorMap = { CONFIRMED: '#4ecdc4', CANDIDATE: '#7ab8ff', 'FALSE POSITIVE': '#ff7979' };
+
+  rows.forEach((r) => {
+    g.append('circle')
+      .attr('cx', x(r.koi_period))
+      .attr('cy', y(r.koi_depth))
+      .attr('r', 3.5)
+      .attr('fill', colorMap[r.koi_disposition] || '#7ab8ff')
+      .attr('opacity', 0.65);
+  });
+}
+
+function renderDatasetKeyFinding(rows) {
+  if (!dom.datasetKeyFinding) return;
+  if (!rows.length) {
+    dom.datasetKeyFinding.innerHTML = '';
+    return;
+  }
+  const shortPeriod = rows.filter((r) => r.koi_period < 10);
+  const longPeriod = rows.filter((r) => r.koi_period > 100);
+  const shortConfirmed = shortPeriod.filter((r) => r.koi_disposition === 'CONFIRMED').length;
+  const shortRate = shortPeriod.length > 0 ? shortConfirmed / shortPeriod.length : 0;
+  const longConfirmed = longPeriod.filter((r) => r.koi_disposition === 'CONFIRMED').length;
+  const longRate = longPeriod.length > 0 ? longConfirmed / longPeriod.length : 0;
+  const ratio = longRate > 0 ? (shortRate / longRate).toFixed(1) : 'far more';
+
+  dom.datasetKeyFinding.innerHTML = `
+    <blockquote class="finding-quote">
+      Planets with orbits under 10 days are <strong>${ratio}x more likely</strong> to be confirmed
+      than those with orbits over 100 days — not because they're more common,
+      but because they're easier to detect.
+    </blockquote>
+  `;
+}
+
+function renderDatasetStoryCharts() {
+  renderDispositionChart(state.koiRecords);
+  renderBiasScatter(state.koiRecords);
+  renderDatasetKeyFinding(state.koiRecords);
+}
+
 function cardTemplate(koi) {
   const transitStrength = clamp(koi.koi_depth / 20000, 0, 1);
   const strengthLabel =
     transitStrength > 0.66 ? 'High-contrast dip' : transitStrength > 0.34 ? 'Moderate dip' : 'Subtle dip';
   const orbitFlavor = koi.koi_period < 10 ? 'Fast orbit' : koi.koi_period < 80 ? 'Mid orbit' : 'Long orbit';
-  const scoreClass = scoredLabel(koi.koi_score);
+  const scoreDisplay = koi.koi_score != null ? `${(koi.koi_score * 100).toFixed(0)}` : 'N/A';
 
   return `
     <article class="star-card" data-koi="${koi.kepoi_name}">
@@ -520,15 +712,13 @@ function cardTemplate(koi) {
           <span class="star-orb" style="background: radial-gradient(circle at 32% 24%, #fff, ${koi.starColor})"></span>
           ${koi.kepoi_name}
         </h3>
-        <span class="score-pill">SCORE: ${(koi.koi_score * 100).toFixed(1)}</span>
+        <span class="score-pill">${koi.koi_score != null ? `SCORE ${scoreDisplay}` : 'UNSCORED'}</span>
       </div>
-      <p class="caption">${koi.koi_disposition} | Spectral ${koi.spectralClass} | Score ${koi.koi_score.toFixed(2)} (${scoreClass})</p>
+      <p class="caption">${koi.koi_disposition} · ${koi.spectralClass}-type star · ${strengthLabel}</p>
       <div class="tag-row">
-        <span class="mini-tag">Spectral ${koi.spectralClass}</span>
-        <span class="mini-tag">${strengthLabel}</span>
         <span class="mini-tag">${orbitFlavor}</span>
+        <span class="mini-tag">${strengthLabel}</span>
       </div>
-      <p class="caption">${koi.koi_period.toFixed(2)} day orbit</p>
       <div class="btn-row">
         <button class="secondary inspect-btn" data-select-koi="${koi.kepoi_name}">Inspect Transit</button>
       </div>
@@ -583,13 +773,39 @@ function renderSelectedMeta() {
   dom.selectedMeta.innerHTML = [
     `<div><span>KOI</span><strong>${s.kepoi_name}</strong></div>`,
     `<div><span>Disposition</span><strong>${s.koi_disposition}</strong></div>`,
-    `<div><span>Period (days)</span><strong>${s.koi_period.toFixed(3)}</strong></div>`,
-    `<div><span>Depth (ppm)</span><strong>${s.koi_depth.toFixed(1)}</strong></div>`,
-    `<div><span>Duration (h)</span><strong>${s.koi_duration.toFixed(2)}</strong></div>`,
-    `<div><span>Stellar Temp (K)</span><strong>${Math.round(s.koi_steff)}</strong></div>`,
-    `<div><span>Planet Radius (Re)</span><strong>${s.koi_prad.toFixed(2)}</strong></div>`,
-    `<div><span>Stellar Radius (Rsolar)</span><strong>${s.koi_srad.toFixed(2)}</strong></div>`,
+    `<div><span>Period</span><strong>${s.koi_period.toFixed(2)} days</strong><em class="human-note">${humanScale('koi_period', s.koi_period)}</em></div>`,
+    `<div><span>Transit Depth</span><strong>${s.koi_depth.toFixed(0)} ppm</strong><em class="human-note">${humanScale('koi_depth', s.koi_depth)}</em></div>`,
+    `<div><span>Duration</span><strong>${s.koi_duration.toFixed(2)} h</strong><em class="human-note">${humanScale('koi_duration', s.koi_duration)}</em></div>`,
+    `<div><span>Host Star</span><strong>${Math.round(s.koi_steff)} K</strong><em class="human-note">${humanScale('koi_steff', s.koi_steff)}</em></div>`,
+    `<div><span>Planet Radius</span><strong>${s.koi_prad.toFixed(2)} R⊕</strong><em class="human-note">${humanScale('koi_prad', s.koi_prad)}</em></div>`,
+    `<div><span>Temperature</span><strong>${Math.round(s.koi_teq)} K</strong><em class="human-note">${humanScale('koi_teq', s.koi_teq)}</em></div>`,
   ].join('');
+}
+
+function renderSizeComparison(koi) {
+  if (!dom.sizeComparison) return;
+  if (!koi) {
+    dom.sizeComparison.innerHTML = '';
+    return;
+  }
+
+  const earthR = 24;
+  const planetR = clamp(earthR * koi.koi_prad, 4, 90);
+  const svgWidth = 280;
+  const svgHeight = Math.max(80, planetR * 2 + 30);
+  const earthCx = 60;
+  const planetCx = earthR + planetR + 100;
+  const cy = svgHeight / 2;
+
+  dom.sizeComparison.innerHTML = `
+    <p class="size-label">Size comparison to Earth</p>
+    <svg width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}" class="size-svg">
+      <circle cx="${earthCx}" cy="${cy}" r="${earthR}" fill="rgba(60, 150, 255, 0.35)" stroke="rgba(100, 180, 255, 0.5)" stroke-width="1" />
+      <text x="${earthCx}" y="${cy + earthR + 14}" fill="#8ea6ce" font-size="10" text-anchor="middle" font-family="Satoshi, sans-serif">Earth</text>
+      <circle cx="${planetCx}" cy="${cy}" r="${planetR}" fill="rgba(${koi.koi_teq > 500 ? '255, 140, 80' : '80, 160, 255'}, 0.3)" stroke="rgba(${koi.koi_teq > 500 ? '255, 170, 110' : '120, 190, 255'}, 0.5)" stroke-width="1" />
+      <text x="${planetCx}" y="${cy + planetR + 14}" fill="#8ea6ce" font-size="10" text-anchor="middle" font-family="Satoshi, sans-serif">${koi.koi_prad.toFixed(1)}x Earth</text>
+    </svg>
+  `;
 }
 
 function renderTransitNarrative(koi) {
@@ -598,13 +814,14 @@ function renderTransitNarrative(koi) {
     return;
   }
 
-  const relativeDepth = clamp((koi.koi_depth / 100000) * 100, 0.01, 100);
   const durationStyle = koi.koi_duration > 8 ? 'long' : koi.koi_duration > 3 ? 'moderate' : 'brief';
   const periodStyle = koi.koi_period > 150 ? 'slow and wide' : koi.koi_period > 20 ? 'steady' : 'rapid';
+  const sizeDesc = humanScale('koi_prad', koi.koi_prad);
+  const tempDesc = humanScale('koi_teq', koi.koi_teq);
   dom.transitInsight.innerHTML =
-    `<strong>Story:</strong> ${koi.kepoi_name} shows a <strong>${durationStyle}</strong> transit with ` +
-    `${relativeDepth.toFixed(2)}% starlight reduction equivalent, on a <strong>${periodStyle}</strong> orbit ` +
-    `(${koi.koi_period.toFixed(2)} days).`;
+    `<strong>${koi.kepoi_name}</strong> orbits on a <strong>${periodStyle}</strong> path ` +
+    `(${koi.koi_period.toFixed(1)} days), casting a <strong>${durationStyle}</strong> shadow across its star. ` +
+    `${sizeDesc}. ${tempDesc}.`;
 }
 
 function renderDataExplain() {
@@ -642,17 +859,17 @@ function renderDataExplain() {
     `Why: detectability ${detectability}/100 is driven by depth + cadence, while habitability ${habitability}/100 blends size, temperature, and orbit distance proxies.`;
 
   if (dom.dossierFieldGrid) {
+    const scoreDisplay = s.koi_score != null ? s.koi_score.toFixed(2) : 'N/A';
     dom.dossierFieldGrid.innerHTML = [
       `<div><span>KOI Name</span><strong>${s.kepoi_name}</strong></div>`,
       `<div><span>Disposition</span><strong>${s.koi_disposition}</strong></div>`,
-      `<div><span>Orbital Period</span><strong>${s.koi_period.toFixed(3)} days</strong></div>`,
-      `<div><span>Transit Depth</span><strong>${s.koi_depth.toFixed(1)} ppm</strong></div>`,
-      `<div><span>Transit Duration</span><strong>${s.koi_duration.toFixed(2)} h</strong></div>`,
-      `<div><span>Planet Radius</span><strong>${s.koi_prad.toFixed(2)} Re</strong></div>`,
-      `<div><span>Equilibrium Temp</span><strong>${Math.round(s.koi_teq)} K</strong></div>`,
-      `<div><span>Stellar Temp</span><strong>${Math.round(s.koi_steff)} K</strong></div>`,
-      `<div><span>Stellar Radius</span><strong>${s.koi_srad.toFixed(2)} Rsolar</strong></div>`,
-      `<div><span>Catalog Score</span><strong>${s.koi_score.toFixed(2)}</strong></div>`,
+      `<div><span>Orbital Period</span><strong>${s.koi_period.toFixed(2)} days</strong><em class="human-note">${humanScale('koi_period', s.koi_period)}</em></div>`,
+      `<div><span>Transit Depth</span><strong>${s.koi_depth.toFixed(0)} ppm</strong><em class="human-note">${humanScale('koi_depth', s.koi_depth)}</em></div>`,
+      `<div><span>Transit Duration</span><strong>${s.koi_duration.toFixed(2)} h</strong><em class="human-note">${humanScale('koi_duration', s.koi_duration)}</em></div>`,
+      `<div><span>Planet Radius</span><strong>${s.koi_prad.toFixed(2)} R⊕</strong><em class="human-note">${humanScale('koi_prad', s.koi_prad)}</em></div>`,
+      `<div><span>Equilibrium Temp</span><strong>${Math.round(s.koi_teq)} K</strong><em class="human-note">${humanScale('koi_teq', s.koi_teq)}</em></div>`,
+      `<div><span>Host Star</span><strong>${Math.round(s.koi_steff)} K · ${s.koi_srad.toFixed(2)} R☉</strong><em class="human-note">${humanScale('koi_steff', s.koi_steff)}</em></div>`,
+      `<div><span>Catalog Score</span><strong>${scoreDisplay}</strong></div>`,
     ].join('');
   }
 
@@ -2053,6 +2270,7 @@ function updateThreeFromKoi(koi) {
 function syncTransitView() {
   if (!state.selectedKoi) return;
   renderSelectedMeta();
+  renderSizeComparison(state.selectedKoi);
   renderTransitNarrative(state.selectedKoi);
   renderDataExplain();
   if (dom.verdictSummary) {
@@ -2196,6 +2414,45 @@ function applyVerdictToUi(result, originalLabel) {
     const reasons = buildReasonList(features);
     dom.reasonList.innerHTML = reasons.map((item) => `<li>${item}</li>`).join('');
   }
+
+  if (dom.confidenceMeter) {
+    const classLabels = ['Candidate', 'Confirmed', 'False Positive'];
+    const classColors = ['#7ab8ff', '#4ecdc4', '#ff7979'];
+    dom.confidenceMeter.innerHTML = `
+      <p class="meter-title">Model confidence breakdown</p>
+      ${probabilities.map((p, i) => `
+        <div class="meter-row">
+          <span class="meter-label">${classLabels[i]}</span>
+          <div class="meter-track">
+            <div class="meter-fill" style="width: ${(p * 100).toFixed(1)}%; background: ${classColors[i]}"></div>
+          </div>
+          <span class="meter-value">${(p * 100).toFixed(1)}%</span>
+        </div>
+      `).join('')}
+    `;
+  }
+
+  if (dom.verdictCounterfactual && features) {
+    const counterfactuals = [];
+    if (features.depth < 3000) {
+      counterfactuals.push('If the transit were 3x deeper, the signal would be much easier to confirm.');
+    }
+    if (features.period > 50) {
+      counterfactuals.push('A shorter orbital period would produce more repeat transits, building confidence faster.');
+    }
+    if (features.prad > 8) {
+      counterfactuals.push('A smaller planet radius would make this less likely to be a binary star false alarm.');
+    }
+    if (!counterfactuals.length) {
+      counterfactuals.push('This signal already has favorable detection characteristics.');
+    }
+    dom.verdictCounterfactual.innerHTML = `
+      <p class="counterfactual-title">What would change this verdict?</p>
+      <ul class="counterfactual-list">
+        ${counterfactuals.map((c) => `<li>${c}</li>`).join('')}
+      </ul>
+    `;
+  }
 }
 
 async function runPredictionFromSelected() {
@@ -2336,6 +2593,7 @@ async function initialize() {
   renderStarList();
   renderMissionInsights();
   renderIntroTicker();
+  renderDatasetStoryCharts();
   const initialTint = state.koiRecords[0]?.starColor || '#8fb8ff';
   ambient3dRuntime?.tint(initialTint);
   setStatusPill();

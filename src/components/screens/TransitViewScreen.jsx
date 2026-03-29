@@ -6,6 +6,7 @@ export default function TransitViewScreen() {
       <div className="grid-two">
         <div className="panel" data-reveal data-reveal-delay="100">
           <div id="three-root" aria-label="3D star visualization" />
+          <div id="size-comparison" className="size-comparison" aria-label="Planet size relative to Earth" />
           <div id="selected-meta" className="meta-grid" style={{ marginTop: 12 }} />
         </div>
         <div className="panel" data-reveal data-reveal-delay="140">

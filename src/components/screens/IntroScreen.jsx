@@ -1,16 +1,17 @@
 export default function IntroScreen() {
   return (
-    <section id="screen-intro" className="screen intro intro-screen active">
+    <section id="screen-intro" className="screen intro intro-screen">
       <div className="intro-shell intro-shell-cinematic" data-reveal>
         <div className="intro-hero-wrap">
           <div className="intro-hero-left" data-reveal data-reveal-delay="40">
-            <p className="hero-overline">Kepler Dataset Story Explorer</p>
+            <p className="hero-overline">A NASA Kepler Data Story</p>
             <h2>
-              Why We Detect Some <span>Worlds</span> More Than Others
+              Not Every Planet Gets <span>Discovered</span> Equally
             </h2>
             <p className="intro-sub">
-              This project turns NASA Kepler candidate signals into a clear story about detectability bias. Explore how
-              transit depth, period, and duration shape which worlds are discovered first.
+              Of the thousands of signals Kepler recorded, only some became confirmed worlds.
+              Explore the hidden bias in how we find new planets — and why the easiest signals
+              get found first.
             </p>
             <div className="btn-row hero-actions">
               <button id="btn-launch">Launch Mission</button>
@@ -60,16 +61,16 @@ export default function IntroScreen() {
 
         <div className="showcase-grid cinematic-showcase">
           <article className="showcase-card" data-reveal data-reveal-delay="160">
-            <h4>Immersive 3D Journey</h4>
-            <p className="caption">Every screen includes live space visuals synchronized to real KOI values.</p>
+            <h4>See the Transit</h4>
+            <p className="caption">Watch a planet cross its star in 3D, synchronized to real NASA measurements.</p>
           </article>
           <article className="showcase-card" data-reveal data-reveal-delay="220">
-            <h4>Signal Story Engine</h4>
-            <p className="caption">Narratives explain why each signal looks strong, weak, or uncertain for follow-up.</p>
+            <h4>Understand the Bias</h4>
+            <p className="caption">Discover why short-period, deep-dip signals dominate our confirmed planet catalog.</p>
           </article>
           <article className="showcase-card" data-reveal data-reveal-delay="280">
-            <h4>Story-first Discovery</h4>
-            <p className="caption">Clear narrative chapters translate scientific parameters into human-readable insights.</p>
+            <h4>Read the Verdict</h4>
+            <p className="caption">An AI model interprets each signal — with plain-language reasoning you can follow.</p>
           </article>
         </div>
       </div>

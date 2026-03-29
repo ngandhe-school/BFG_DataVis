@@ -16,36 +16,6 @@ export default function App() {
       <main className="app-shell">
         <AppHeader />
         <section className="workspace-shell">
-          <aside className="side-rail">
-            <div className="rail-status">
-              <span className="rail-dot" />
-              <small>ONLINE</small>
-            </div>
-            <button className="rail-link" data-nav="INTRO" data-screen-link="INTRO">
-              <span>▣</span>
-              <small>Brief</small>
-            </button>
-            <button className="rail-link" data-nav="STAR_SELECT" data-screen-link="STAR_SELECT">
-              <span>★</span>
-              <small>Select</small>
-            </button>
-            <button className="rail-link" data-nav="TRANSIT_VIEW" data-screen-link="TRANSIT_VIEW">
-              <span>⌁</span>
-              <small>Transit</small>
-            </button>
-            <button className="rail-link" data-nav="DATA_EXPLAIN" data-screen-link="DATA_EXPLAIN">
-              <span>◎</span>
-              <small>Dossier</small>
-            </button>
-            <button className="rail-link" data-nav="DATASET_STORY" data-screen-link="DATASET_STORY">
-              <span>◈</span>
-              <small>Dataset</small>
-            </button>
-            <button className="rail-link" data-nav="AI_VERDICT" data-screen-link="AI_VERDICT">
-              <span>◍</span>
-              <small>Story</small>
-            </button>
-          </aside>
           <div className="screen-stack">
             <IntroScreen />
             <StarSelectScreen />
@@ -56,10 +26,8 @@ export default function App() {
           </div>
         </section>
         <footer className="app-footer">
-          <span>Source: NASA Kepler Data v4.2</span>
-          <span>Documentation</span>
-          <span>Support</span>
-          <span>Legal</span>
+          <span>Data: NASA Exoplanet Archive — Kepler Cumulative Table</span>
+          <span>Stellar Fingerprints · BFG Hackathon 2026</span>
         </footer>
       </main>
     </>
