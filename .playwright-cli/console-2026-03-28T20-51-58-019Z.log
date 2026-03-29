@@ -1,0 +1,8 @@
+[   97939ms] [WARNING] Model load skipped. Using heuristic fallback. Error: Failed to parse model JSON of response from ./model/model.json. Please make sure the server is serving valid JSON for this request.
+    at HTTPRequest.loadModelJSON (http://localhost:5173/node_modules/.vite/deps/@tensorflow_tfjs.js?v=d0d6bc2d:12720:13)
+    at async HTTPRequest.load (http://localhost:5173/node_modules/.vite/deps/@tensorflow_tfjs.js?v=d0d6bc2d:12741:23)
+    at async loadLayersModelFromIOHandler (http://localhost:5173/node_modules/.vite/deps/@tensorflow_tfjs.js?v=d0d6bc2d:24059:21)
+    at async ensureModelLoaded (http://localhost:5173/app.js?t=1774730988328:2342:19)
+    at async predictFromFeatures (http://localhost:5173/app.js?t=1774730988328:2373:3)
+    at async runPredictionFromSelected (http://localhost:5173/app.js?t=1774730988328:2465:18)
+    at async HTMLButtonElement.<anonymous> (http://localhost:5173/app.js?t=1774730988328:2827:5) @ http://localhost:5173/app.js?t=1774730988328:2346

@@ -1,0 +1,10 @@
+---
+description: Apply project frontend skill for React/Vite UI work
+alwaysApply: true
+---
+
+# Frontend Skill Routing
+
+- For frontend tasks in this repository, use the project skill at `.cursor/skills/frontend-development/SKILL.md`.
+- Treat this skill as the default workflow for React component edits, CSS/layout changes, and UI interaction updates.
+- Validate user-facing changes with browser automation and capture at least one snapshot plus one screenshot.

@@ -1,0 +1,20 @@
+{
+  "outputDir": ".playwright-cli",
+  "outputMode": "file",
+  "browser": {
+    "browserName": "chromium",
+    "contextOptions": {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    }
+  },
+  "timeouts": {
+    "action": 8000,
+    "navigation": 60000
+  },
+  "console": {
+    "level": "info"
+  }
+}

@@ -163,6 +163,13 @@ Excluded from Phase 1:
 - Final shader polish, full UI polish, full accessibility pass, final performance tuning.
 - Backend services, auth, persistent user storage.
 
+## Current Phase 1+ Implementation Snapshot
+- Data-source resilience is active (live NASA TAP -> cache -> bundled fallback).
+- 5-screen deterministic state-machine flow is implemented end-to-end.
+- Enhanced 3D star experience now includes shader-driven star surface, orbit context ring, nebula background, and bloom pass.
+- Transit chart now supports synchronized playhead + timeline controls (scrub, speed, pause/play) aligned with 3D motion.
+- Narrative-first UX is added through mission insight cards and plain-language transit explanations.
+
 ## Decision Log Snapshot
 - Runtime architecture remains frontend-only (CDN libs + static assets).
 - KOI cumulative remains primary source for live data.

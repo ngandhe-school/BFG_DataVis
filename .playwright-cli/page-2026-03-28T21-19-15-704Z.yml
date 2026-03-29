@@ -1,0 +1,120 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - heading "Stellar Fingerprints" [level=1] [ref=e6]
+    - navigation [ref=e7]:
+      - button "Mission Brief" [ref=e8] [cursor=pointer]
+      - button "Star Select" [ref=e9] [cursor=pointer]
+      - button "Transit View" [ref=e10] [cursor=pointer]
+      - button "Star Dossier" [ref=e11] [cursor=pointer]
+      - button "Dataset Story" [ref=e12] [cursor=pointer]
+      - button "Signal Story" [ref=e13] [cursor=pointer]
+    - generic [ref=e14]:
+      - generic [ref=e15]: Fallback Data • AI Standby
+      - generic [ref=e16]: ◌
+      - generic [ref=e17]: ◉
+  - generic [ref=e18]:
+    - complementary [ref=e19]:
+      - generic [ref=e22]: ONLINE
+      - button "▣ Brief" [ref=e23] [cursor=pointer]:
+        - generic [ref=e24]: ▣
+        - generic [ref=e25]: Brief
+      - button "★ Select" [ref=e26] [cursor=pointer]:
+        - generic [ref=e27]: ★
+        - generic [ref=e28]: Select
+      - button "⌁ Transit" [ref=e29] [cursor=pointer]:
+        - generic [ref=e30]: ⌁
+        - generic [ref=e31]: Transit
+      - button "◎ Dossier" [ref=e32] [cursor=pointer]:
+        - generic [ref=e33]: ◎
+        - generic [ref=e34]: Dossier
+      - button "◈ Dataset" [ref=e35] [cursor=pointer]:
+        - generic [ref=e36]: ◈
+        - generic [ref=e37]: Dataset
+      - button "◍ Story" [ref=e38] [cursor=pointer]:
+        - generic [ref=e39]: ◍
+        - generic [ref=e40]: Story
+    - generic [ref=e1239]:
+      - heading "Transit View" [level=2] [ref=e1240]
+      - paragraph [ref=e1241]: 3D star rendering and synthesized transit curve from KOI parameters.
+      - generic [ref=e1242]:
+        - generic [ref=e1243]:
+          - generic "3D star visualization" [ref=e1244]
+          - generic [ref=e1246]:
+            - generic [ref=e1247]:
+              - generic [ref=e1248]: KOI
+              - strong [ref=e1249]: K00113.01
+            - generic [ref=e1250]:
+              - generic [ref=e1251]: Disposition
+              - strong [ref=e1252]: FALSE POSITIVE
+            - generic [ref=e1253]:
+              - generic [ref=e1254]: Period (days)
+              - strong [ref=e1255]: "386.603"
+            - generic [ref=e1256]:
+              - generic [ref=e1257]: Depth (ppm)
+              - strong [ref=e1258]: "24926.6"
+            - generic [ref=e1259]:
+              - generic [ref=e1260]: Duration (h)
+              - strong [ref=e1261]: "6.81"
+            - generic [ref=e1262]:
+              - generic [ref=e1263]: Stellar Temp (K)
+              - strong [ref=e1264]: "5543"
+            - generic [ref=e1265]:
+              - generic [ref=e1266]: Planet Radius (Re)
+              - strong [ref=e1267]: "41.50"
+            - generic [ref=e1268]:
+              - generic [ref=e1269]: Stellar Radius (Rsolar)
+              - strong [ref=e1270]: "1.58"
+        - generic [ref=e1271]:
+          - img [ref=e1273]:
+            - generic [ref=e1274]:
+              - generic [ref=e1275]:
+                - generic [ref=e1278]: "0.0"
+                - generic [ref=e1280]: "0.2"
+                - generic [ref=e1282]: "0.4"
+                - generic [ref=e1284]: "0.6"
+                - generic [ref=e1286]: "0.8"
+                - generic [ref=e1288]: "1.0"
+              - generic [ref=e1289]:
+                - generic [ref=e1292]: "0.980"
+                - generic [ref=e1294]: "0.985"
+                - generic [ref=e1296]: "0.990"
+                - generic [ref=e1298]: "0.995"
+                - generic [ref=e1300]: "1.000"
+              - generic [ref=e1304]: Orbital phase
+          - generic [ref=e1305]:
+            - generic [ref=e1306]:
+              - button "Pause" [ref=e1307] [cursor=pointer]
+              - generic [ref=e1308]: Phase 0.011
+              - generic [ref=e1309]: Speed 1.0x
+            - generic [ref=e1310]:
+              - text: Timeline scrubber
+              - slider "Timeline scrubber" [ref=e1311]: "11"
+            - generic [ref=e1312]:
+              - text: Playback speed
+              - slider "Playback speed" [ref=e1313]: "1"
+            - generic [ref=e1314]:
+              - button "Focus Camera" [ref=e1315] [cursor=pointer]
+              - button "Cinematic Camera" [ref=e1316] [cursor=pointer]
+            - generic [ref=e1317]:
+              - text: Atmosphere intensity
+              - slider "Atmosphere intensity" [ref=e1318]: "1"
+          - paragraph [ref=e1319]:
+            - strong [ref=e1320]: "Story:"
+            - text: K00113.01 shows a
+            - strong [ref=e1321]: moderate
+            - text: transit with 24.93% starlight reduction equivalent, on a
+            - strong [ref=e1322]: slow and wide
+            - text: orbit (386.60 days).
+          - generic [ref=e1323]:
+            - strong [ref=e1324]: Guided Story Mode
+            - paragraph [ref=e1325]: Tour inactive.
+            - button "Next Story Stop" [ref=e1327] [cursor=pointer]
+      - generic [ref=e1328]:
+        - button "Choose Another Star" [ref=e1329] [cursor=pointer]
+        - button "Explain This Star" [ref=e1330] [cursor=pointer]
+        - button "Run AI Verdict" [ref=e1331] [cursor=pointer]
+  - generic [ref=e86]:
+    - generic [ref=e87]: "Source: NASA Kepler Data v4.2"
+    - generic [ref=e88]: Documentation
+    - generic [ref=e89]: Support
+    - generic [ref=e90]: Legal

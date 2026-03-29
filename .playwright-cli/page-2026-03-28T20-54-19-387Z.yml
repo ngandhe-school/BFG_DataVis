@@ -1,0 +1,89 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - heading "Stellar Fingerprints" [level=1] [ref=e6]
+    - navigation [ref=e7]:
+      - button "Mission Brief" [ref=e8] [cursor=pointer]
+      - button "Star Select" [ref=e9] [cursor=pointer]
+      - button "Transit View" [ref=e10] [cursor=pointer]
+      - button "Star Dossier" [ref=e11] [cursor=pointer]
+      - button "Dataset Story" [ref=e12] [cursor=pointer]
+      - button "Signal Story" [ref=e13] [cursor=pointer]
+      - button "Draw Simulator" [ref=e14] [cursor=pointer]
+    - generic [ref=e15]:
+      - generic [ref=e16]: Fallback Data • AI Standby
+      - generic [ref=e17]: ◌
+      - generic [ref=e18]: ◉
+  - generic [ref=e19]:
+    - complementary [ref=e20]:
+      - generic [ref=e23]: ONLINE
+      - button "▣ Brief" [ref=e24] [cursor=pointer]:
+        - generic [ref=e25]: ▣
+        - generic [ref=e26]: Brief
+      - button "★ Select" [ref=e27] [cursor=pointer]:
+        - generic [ref=e28]: ★
+        - generic [ref=e29]: Select
+      - button "⌁ Transit" [ref=e30] [cursor=pointer]:
+        - generic [ref=e31]: ⌁
+        - generic [ref=e32]: Transit
+      - button "◎ Dossier" [ref=e33] [cursor=pointer]:
+        - generic [ref=e34]: ◎
+        - generic [ref=e35]: Dossier
+      - button "◈ Dataset" [ref=e36] [cursor=pointer]:
+        - generic [ref=e37]: ◈
+        - generic [ref=e38]: Dataset
+      - button "◍ Story" [ref=e39] [cursor=pointer]:
+        - generic [ref=e40]: ◍
+        - generic [ref=e41]: Story
+      - button "✎ Sim" [ref=e42] [cursor=pointer]:
+        - generic [ref=e43]: ✎
+        - generic [ref=e44]: Sim
+    - generic [ref=e1336]:
+      - heading "Signal Story" [level=2] [ref=e1337]
+      - paragraph [ref=e1338]: Interpretable scores showing how detectable and trustworthy this transit signal looks.
+      - generic [ref=e1339]:
+        - generic [ref=e1340]:
+          - generic [ref=e1341]:
+            - strong [ref=e1342]: Signal Story Generated
+            - paragraph [ref=e1343]: "Discovery-bias simulator: this verdict reflects how your drawn shape affects detectability and follow-up value."
+          - paragraph [ref=e1344]: "Moderate evidence profile: detectability 60/100, reliability 56/100, follow-up priority 64/100."
+          - generic [ref=e1345]:
+            - generic [ref=e1346]: Detectability
+            - strong [ref=e1349]: 60%
+          - generic [ref=e1350]:
+            - generic [ref=e1351]: Signal Reliability
+            - strong [ref=e1354]: 56%
+          - generic [ref=e1355]:
+            - generic [ref=e1356]: Follow-up Priority
+            - strong [ref=e1359]: 64%
+        - generic [ref=e1360]:
+          - img [ref=e1445]:
+            - generic [ref=e1451]: Detectability
+            - generic [ref=e1452]: Reliability
+            - generic [ref=e1453]: Follow-up Priority
+            - generic [ref=e1454]: Signal Depth
+            - generic [ref=e1455]: Repeatability
+          - generic [ref=e1375]:
+            - article [ref=e1376]:
+              - text: "Detectability tier:"
+              - strong [ref=e1377]: Moderate
+            - article [ref=e1378]:
+              - text: "Reliability tier:"
+              - strong [ref=e1379]: Moderate
+            - article [ref=e1380]:
+              - text: "Follow-up tier:"
+              - strong [ref=e1381]: Moderate
+          - paragraph [ref=e1382]: "Uncertainty warning: the model separation is narrow. Treat this as exploratory ranking, not final truth."
+          - list [ref=e1383]:
+            - listitem [ref=e1456]: Moderate depth range supports a balanced detectability and reliability profile.
+            - listitem [ref=e1457]: Short orbital period means more repeated transits, usually increasing detectability.
+            - listitem [ref=e1458]: Smaller radius estimates improve reliability for planet-like transit interpretation.
+            - listitem [ref=e1459]: Model confidence separation is low, so treat this as a hypothesis for follow-up checks.
+      - generic [ref=e1388]:
+        - button "Back to Transit" [ref=e1389] [cursor=pointer]
+        - button "Open Star Dossier" [ref=e1390] [cursor=pointer]
+        - button "Open Draw Mode" [ref=e1391] [cursor=pointer]
+  - generic [ref=e90]:
+    - generic [ref=e91]: "Source: NASA Kepler Data v4.2"
+    - generic [ref=e92]: Documentation
+    - generic [ref=e93]: Support
+    - generic [ref=e94]: Legal

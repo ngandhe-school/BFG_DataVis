@@ -1,0 +1,12 @@
+---
+description: Use playwright-cli for browser automation in this repo
+alwaysApply: true
+---
+
+# Playwright CLI Workflow
+
+- Use `playwright-cli` for browser automation tasks in this project.
+- Prefer `npm run pw:*` scripts for common operations (`open`, `snapshot`, `screenshot`, `console`, `network`, `close`).
+- When validating UI changes, capture at least one `snapshot` and one `screenshot`.
+- Reuse the short session name `sf` unless a test requires isolation.
+- Keep browser automation focused on user-facing flows: screen navigation, 3D rendering visibility, and AI verdict path.

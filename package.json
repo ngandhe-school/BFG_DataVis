@@ -1,0 +1,32 @@
+{
+  "name": "stellar-fingerprints-react",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "pw:help": "playwright-cli --help",
+    "pw:skills": "playwright-cli install --skills",
+    "pw:open": "playwright-cli open http://localhost:5173 --headed -s=sf",
+    "pw:snapshot": "playwright-cli snapshot -s=sf",
+    "pw:screenshot": "playwright-cli screenshot -s=sf",
+    "pw:console": "playwright-cli console info -s=sf",
+    "pw:network": "playwright-cli network -s=sf",
+    "pw:close": "playwright-cli close -s=sf",
+    "pw:open:fallback": "TMPDIR=/tmp playwright-cli open http://localhost:5173 --headed -s=sf"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0",
+    "d3": "^7.9.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.179.1"
+  },
+  "devDependencies": {
+    "@playwright/cli": "^0.1.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.10"
+  }
+}

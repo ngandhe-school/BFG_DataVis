@@ -1,0 +1,1002 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - heading "Stellar Fingerprints" [level=1] [ref=e6]
+    - navigation [ref=e7]:
+      - button "Mission Brief" [ref=e8] [cursor=pointer]
+      - button "Star Select" [ref=e9] [cursor=pointer]
+      - button "Transit View" [ref=e10] [cursor=pointer]
+      - button "Star Dossier" [ref=e11] [cursor=pointer]
+      - button "Dataset Story" [ref=e12] [cursor=pointer]
+      - button "Signal Story" [ref=e13] [cursor=pointer]
+    - generic [ref=e14]:
+      - generic [ref=e15]: Fallback Data • AI Standby
+      - generic [ref=e16]: ◌
+      - generic [ref=e17]: ◉
+  - generic [ref=e18]:
+    - complementary [ref=e19]:
+      - generic [ref=e22]: ONLINE
+      - button "▣ Brief" [ref=e23] [cursor=pointer]:
+        - generic [ref=e24]: ▣
+        - generic [ref=e25]: Brief
+      - button "★ Select" [ref=e26] [cursor=pointer]:
+        - generic [ref=e27]: ★
+        - generic [ref=e28]: Select
+      - button "⌁ Transit" [ref=e29] [cursor=pointer]:
+        - generic [ref=e30]: ⌁
+        - generic [ref=e31]: Transit
+      - button "◎ Dossier" [ref=e32] [cursor=pointer]:
+        - generic [ref=e33]: ◎
+        - generic [ref=e34]: Dossier
+      - button "◈ Dataset" [ref=e35] [cursor=pointer]:
+        - generic [ref=e36]: ◈
+        - generic [ref=e37]: Dataset
+      - button "◍ Story" [ref=e38] [cursor=pointer]:
+        - generic [ref=e39]: ◍
+        - generic [ref=e40]: Story
+    - generic [ref=e112]:
+      - heading "Catalog Objects" [level=2] [ref=e113]
+      - paragraph [ref=e114]: Refining candidate targets for transit analysis.
+      - generic [ref=e115]:
+        - searchbox "Search KOI name" [ref=e116]
+        - combobox "Filter by spectral class" [ref=e117]:
+          - option "All Spectral Classes" [selected]
+          - option "O"
+          - option "B"
+          - option "A"
+          - option "F"
+          - option "G"
+          - option "K"
+          - option "M"
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - article [ref=e120]:
+            - generic [ref=e121]:
+              - heading "K00113.01" [level=3] [ref=e122]: K00113.01
+              - generic [ref=e124]: "SCORE: 0.0"
+            - paragraph [ref=e125]: FALSE POSITIVE | Spectral G | Score 0.00 (D)
+            - generic [ref=e126]:
+              - generic [ref=e127]: Spectral G
+              - generic [ref=e128]: High-contrast dip
+              - generic [ref=e129]: Long orbit
+            - paragraph [ref=e130]: 386.60 day orbit
+            - button "Inspect Transit" [ref=e132] [cursor=pointer]
+          - article [ref=e133]:
+            - generic [ref=e134]:
+              - heading "K00806.03" [level=3] [ref=e135]: K00806.03
+              - generic [ref=e137]: "SCORE: 0.0"
+            - paragraph [ref=e138]: CONFIRMED | Spectral G | Score 0.00 (D)
+            - generic [ref=e139]:
+              - generic [ref=e140]: Spectral G
+              - generic [ref=e141]: Subtle dip
+              - generic [ref=e142]: Mid orbit
+            - paragraph [ref=e143]: 29.16 day orbit
+            - button "Inspect Transit" [ref=e145] [cursor=pointer]
+          - article [ref=e146]:
+            - generic [ref=e147]:
+              - heading "K00789.01" [level=3] [ref=e148]: K00789.01
+              - generic [ref=e150]: "SCORE: 0.0"
+            - paragraph [ref=e151]: FALSE POSITIVE | Spectral G | Score 0.00 (D)
+            - generic [ref=e152]:
+              - generic [ref=e153]: Spectral G
+              - generic [ref=e154]: Subtle dip
+              - generic [ref=e155]: Mid orbit
+            - paragraph [ref=e156]: 14.18 day orbit
+            - button "Inspect Transit" [ref=e158] [cursor=pointer]
+          - article [ref=e159]:
+            - generic [ref=e160]:
+              - heading "K00812.02" [level=3] [ref=e161]: K00812.02
+              - generic [ref=e163]: "SCORE: 100.0"
+            - paragraph [ref=e164]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e165]:
+              - generic [ref=e166]: Spectral K
+              - generic [ref=e167]: Subtle dip
+              - generic [ref=e168]: Mid orbit
+            - paragraph [ref=e169]: 20.06 day orbit
+            - button "Inspect Transit" [ref=e171] [cursor=pointer]
+          - article [ref=e172]:
+            - generic [ref=e173]:
+              - heading "K00812.03" [level=3] [ref=e174]: K00812.03
+              - generic [ref=e176]: "SCORE: 100.0"
+            - paragraph [ref=e177]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e178]:
+              - generic [ref=e179]: Spectral K
+              - generic [ref=e180]: Subtle dip
+              - generic [ref=e181]: Mid orbit
+            - paragraph [ref=e182]: 46.18 day orbit
+            - button "Inspect Transit" [ref=e184] [cursor=pointer]
+          - article [ref=e185]:
+            - generic [ref=e186]:
+              - heading "K00813.01" [level=3] [ref=e187]: K00813.01
+              - generic [ref=e189]: "SCORE: 100.0"
+            - paragraph [ref=e190]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e191]:
+              - generic [ref=e192]: Spectral G
+              - generic [ref=e193]: Moderate dip
+              - generic [ref=e194]: Fast orbit
+            - paragraph [ref=e195]: 3.90 day orbit
+            - button "Inspect Transit" [ref=e197] [cursor=pointer]
+          - article [ref=e198]:
+            - generic [ref=e199]:
+              - heading "K00801.01" [level=3] [ref=e200]: K00801.01
+              - generic [ref=e202]: "SCORE: 100.0"
+            - paragraph [ref=e203]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e204]:
+              - generic [ref=e205]: Spectral G
+              - generic [ref=e206]: Moderate dip
+              - generic [ref=e207]: Fast orbit
+            - paragraph [ref=e208]: 1.63 day orbit
+            - button "Inspect Transit" [ref=e210] [cursor=pointer]
+          - article [ref=e211]:
+            - generic [ref=e212]:
+              - heading "K00802.01" [level=3] [ref=e213]: K00802.01
+              - generic [ref=e215]: "SCORE: 100.0"
+            - paragraph [ref=e216]: CANDIDATE | Spectral G | Score 1.00 (A)
+            - generic [ref=e217]:
+              - generic [ref=e218]: Spectral G
+              - generic [ref=e219]: High-contrast dip
+              - generic [ref=e220]: Mid orbit
+            - paragraph [ref=e221]: 19.62 day orbit
+            - button "Inspect Transit" [ref=e223] [cursor=pointer]
+          - article [ref=e224]:
+            - generic [ref=e225]:
+              - heading "K00804.01" [level=3] [ref=e226]: K00804.01
+              - generic [ref=e228]: "SCORE: 100.0"
+            - paragraph [ref=e229]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e230]:
+              - generic [ref=e231]: Spectral G
+              - generic [ref=e232]: Subtle dip
+              - generic [ref=e233]: Fast orbit
+            - paragraph [ref=e234]: 9.03 day orbit
+            - button "Inspect Transit" [ref=e236] [cursor=pointer]
+          - article [ref=e237]:
+            - generic [ref=e238]:
+              - heading "K00806.01" [level=3] [ref=e239]: K00806.01
+              - generic [ref=e241]: "SCORE: 100.0"
+            - paragraph [ref=e242]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e243]:
+              - generic [ref=e244]: Spectral G
+              - generic [ref=e245]: Moderate dip
+              - generic [ref=e246]: Long orbit
+            - paragraph [ref=e247]: 143.21 day orbit
+            - button "Inspect Transit" [ref=e249] [cursor=pointer]
+          - article [ref=e250]:
+            - generic [ref=e251]:
+              - heading "K00809.01" [level=3] [ref=e252]: K00809.01
+              - generic [ref=e254]: "SCORE: 100.0"
+            - paragraph [ref=e255]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e256]:
+              - generic [ref=e257]: Spectral G
+              - generic [ref=e258]: High-contrast dip
+              - generic [ref=e259]: Fast orbit
+            - paragraph [ref=e260]: 1.59 day orbit
+            - button "Inspect Transit" [ref=e262] [cursor=pointer]
+          - article [ref=e263]:
+            - generic [ref=e264]:
+              - heading "K00810.01" [level=3] [ref=e265]: K00810.01
+              - generic [ref=e267]: "SCORE: 100.0"
+            - paragraph [ref=e268]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e269]:
+              - generic [ref=e270]: Spectral K
+              - generic [ref=e271]: Subtle dip
+              - generic [ref=e272]: Fast orbit
+            - paragraph [ref=e273]: 4.78 day orbit
+            - button "Inspect Transit" [ref=e275] [cursor=pointer]
+          - article [ref=e276]:
+            - generic [ref=e277]:
+              - heading "K00811.01" [level=3] [ref=e278]: K00811.01
+              - generic [ref=e280]: "SCORE: 100.0"
+            - paragraph [ref=e281]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e282]:
+              - generic [ref=e283]: Spectral K
+              - generic [ref=e284]: Subtle dip
+              - generic [ref=e285]: Mid orbit
+            - paragraph [ref=e286]: 20.51 day orbit
+            - button "Inspect Transit" [ref=e288] [cursor=pointer]
+          - article [ref=e289]:
+            - generic [ref=e290]:
+              - heading "K00812.01" [level=3] [ref=e291]: K00812.01
+              - generic [ref=e293]: "SCORE: 100.0"
+            - paragraph [ref=e294]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e295]:
+              - generic [ref=e296]: Spectral K
+              - generic [ref=e297]: Subtle dip
+              - generic [ref=e298]: Fast orbit
+            - paragraph [ref=e299]: 3.34 day orbit
+            - button "Inspect Transit" [ref=e301] [cursor=pointer]
+          - article [ref=e302]:
+            - generic [ref=e303]:
+              - heading "K00829.01" [level=3] [ref=e304]: K00829.01
+              - generic [ref=e306]: "SCORE: 100.0"
+            - paragraph [ref=e307]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e308]:
+              - generic [ref=e309]: Spectral G
+              - generic [ref=e310]: Subtle dip
+              - generic [ref=e311]: Mid orbit
+            - paragraph [ref=e312]: 18.65 day orbit
+            - button "Inspect Transit" [ref=e314] [cursor=pointer]
+          - article [ref=e315]:
+            - generic [ref=e316]:
+              - heading "K00117.02" [level=3] [ref=e317]: K00117.02
+              - generic [ref=e319]: "SCORE: 100.0"
+            - paragraph [ref=e320]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e321]:
+              - generic [ref=e322]: Spectral G
+              - generic [ref=e323]: Subtle dip
+              - generic [ref=e324]: Fast orbit
+            - paragraph [ref=e325]: 4.90 day orbit
+            - button "Inspect Transit" [ref=e327] [cursor=pointer]
+          - article [ref=e328]:
+            - generic [ref=e329]:
+              - heading "K00829.03" [level=3] [ref=e330]: K00829.03
+              - generic [ref=e332]: "SCORE: 100.0"
+            - paragraph [ref=e333]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e334]:
+              - generic [ref=e335]: Spectral G
+              - generic [ref=e336]: Subtle dip
+              - generic [ref=e337]: Mid orbit
+            - paragraph [ref=e338]: 38.56 day orbit
+            - button "Inspect Transit" [ref=e340] [cursor=pointer]
+          - article [ref=e341]:
+            - generic [ref=e342]:
+              - heading "K00815.01" [level=3] [ref=e343]: K00815.01
+              - generic [ref=e345]: "SCORE: 100.0"
+            - paragraph [ref=e346]: CANDIDATE | Spectral G | Score 1.00 (A)
+            - generic [ref=e347]:
+              - generic [ref=e348]: Spectral G
+              - generic [ref=e349]: Subtle dip
+              - generic [ref=e350]: Mid orbit
+            - paragraph [ref=e351]: 34.84 day orbit
+            - button "Inspect Transit" [ref=e353] [cursor=pointer]
+          - article [ref=e354]:
+            - generic [ref=e355]:
+              - heading "K00816.01" [level=3] [ref=e356]: K00816.01
+              - generic [ref=e358]: "SCORE: 100.0"
+            - paragraph [ref=e359]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e360]:
+              - generic [ref=e361]: Spectral G
+              - generic [ref=e362]: Subtle dip
+              - generic [ref=e363]: Fast orbit
+            - paragraph [ref=e364]: 7.75 day orbit
+            - button "Inspect Transit" [ref=e366] [cursor=pointer]
+          - article [ref=e367]:
+            - generic [ref=e368]:
+              - heading "K00817.01" [level=3] [ref=e369]: K00817.01
+              - generic [ref=e371]: "SCORE: 100.0"
+            - paragraph [ref=e372]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e373]:
+              - generic [ref=e374]: Spectral K
+              - generic [ref=e375]: Subtle dip
+              - generic [ref=e376]: Mid orbit
+            - paragraph [ref=e377]: 23.97 day orbit
+            - button "Inspect Transit" [ref=e379] [cursor=pointer]
+          - article [ref=e380]:
+            - generic [ref=e381]:
+              - heading "K00818.01" [level=3] [ref=e382]: K00818.01
+              - generic [ref=e384]: "SCORE: 100.0"
+            - paragraph [ref=e385]: CONFIRMED | Spectral M | Score 1.00 (A)
+            - generic [ref=e386]:
+              - generic [ref=e387]: Spectral M
+              - generic [ref=e388]: Subtle dip
+              - generic [ref=e389]: Fast orbit
+            - paragraph [ref=e390]: 8.11 day orbit
+            - button "Inspect Transit" [ref=e392] [cursor=pointer]
+          - article [ref=e393]:
+            - generic [ref=e394]:
+              - heading "K00752.01" [level=3] [ref=e395]: K00752.01
+              - generic [ref=e397]: "SCORE: 100.0"
+            - paragraph [ref=e398]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e399]:
+              - generic [ref=e400]: Spectral G
+              - generic [ref=e401]: Subtle dip
+              - generic [ref=e402]: Fast orbit
+            - paragraph [ref=e403]: 9.49 day orbit
+            - button "Inspect Transit" [ref=e405] [cursor=pointer]
+          - article [ref=e406]:
+            - generic [ref=e407]:
+              - heading "K00755.01" [level=3] [ref=e408]: K00755.01
+              - generic [ref=e410]: "SCORE: 100.0"
+            - paragraph [ref=e411]: CONFIRMED | Spectral F | Score 1.00 (A)
+            - generic [ref=e412]:
+              - generic [ref=e413]: Spectral F
+              - generic [ref=e414]: Subtle dip
+              - generic [ref=e415]: Fast orbit
+            - paragraph [ref=e416]: 2.53 day orbit
+            - button "Inspect Transit" [ref=e418] [cursor=pointer]
+          - article [ref=e419]:
+            - generic [ref=e420]:
+              - heading "K00756.01" [level=3] [ref=e421]: K00756.01
+              - generic [ref=e423]: "SCORE: 100.0"
+            - paragraph [ref=e424]: CONFIRMED | Spectral F | Score 1.00 (A)
+            - generic [ref=e425]:
+              - generic [ref=e426]: Spectral F
+              - generic [ref=e427]: Subtle dip
+              - generic [ref=e428]: Mid orbit
+            - paragraph [ref=e429]: 11.09 day orbit
+            - button "Inspect Transit" [ref=e431] [cursor=pointer]
+          - article [ref=e432]:
+            - generic [ref=e433]:
+              - heading "K00756.02" [level=3] [ref=e434]: K00756.02
+              - generic [ref=e436]: "SCORE: 100.0"
+            - paragraph [ref=e437]: CONFIRMED | Spectral F | Score 1.00 (A)
+            - generic [ref=e438]:
+              - generic [ref=e439]: Spectral F
+              - generic [ref=e440]: Subtle dip
+              - generic [ref=e441]: Fast orbit
+            - paragraph [ref=e442]: 4.13 day orbit
+            - button "Inspect Transit" [ref=e444] [cursor=pointer]
+          - article [ref=e445]:
+            - generic [ref=e446]:
+              - heading "K00757.01" [level=3] [ref=e447]: K00757.01
+              - generic [ref=e449]: "SCORE: 100.0"
+            - paragraph [ref=e450]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e451]:
+              - generic [ref=e452]: Spectral K
+              - generic [ref=e453]: Subtle dip
+              - generic [ref=e454]: Mid orbit
+            - paragraph [ref=e455]: 16.07 day orbit
+            - button "Inspect Transit" [ref=e457] [cursor=pointer]
+          - article [ref=e458]:
+            - generic [ref=e459]:
+              - heading "K00002.01" [level=3] [ref=e460]: K00002.01
+              - generic [ref=e462]: "SCORE: 100.0"
+            - paragraph [ref=e463]: CONFIRMED | Spectral F | Score 1.00 (A)
+            - generic [ref=e464]:
+              - generic [ref=e465]: Spectral F
+              - generic [ref=e466]: Subtle dip
+              - generic [ref=e467]: Fast orbit
+            - paragraph [ref=e468]: 2.20 day orbit
+            - button "Inspect Transit" [ref=e470] [cursor=pointer]
+          - article [ref=e471]:
+            - generic [ref=e472]:
+              - heading "K00112.02" [level=3] [ref=e473]: K00112.02
+              - generic [ref=e475]: "SCORE: 100.0"
+            - paragraph [ref=e476]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e477]:
+              - generic [ref=e478]: Spectral G
+              - generic [ref=e479]: Subtle dip
+              - generic [ref=e480]: Fast orbit
+            - paragraph [ref=e481]: 3.71 day orbit
+            - button "Inspect Transit" [ref=e483] [cursor=pointer]
+          - article [ref=e484]:
+            - generic [ref=e485]:
+              - heading "K00746.01" [level=3] [ref=e486]: K00746.01
+              - generic [ref=e488]: "SCORE: 100.0"
+            - paragraph [ref=e489]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e490]:
+              - generic [ref=e491]: Spectral K
+              - generic [ref=e492]: Subtle dip
+              - generic [ref=e493]: Fast orbit
+            - paragraph [ref=e494]: 9.27 day orbit
+            - button "Inspect Transit" [ref=e496] [cursor=pointer]
+          - article [ref=e497]:
+            - generic [ref=e498]:
+              - heading "K00747.01" [level=3] [ref=e499]: K00747.01
+              - generic [ref=e501]: "SCORE: 100.0"
+            - paragraph [ref=e502]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e503]:
+              - generic [ref=e504]: Spectral K
+              - generic [ref=e505]: Subtle dip
+              - generic [ref=e506]: Fast orbit
+            - paragraph [ref=e507]: 6.03 day orbit
+            - button "Inspect Transit" [ref=e509] [cursor=pointer]
+          - article [ref=e510]:
+            - generic [ref=e511]:
+              - heading "K00749.01" [level=3] [ref=e512]: K00749.01
+              - generic [ref=e514]: "SCORE: 100.0"
+            - paragraph [ref=e515]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e516]:
+              - generic [ref=e517]: Spectral K
+              - generic [ref=e518]: Subtle dip
+              - generic [ref=e519]: Fast orbit
+            - paragraph [ref=e520]: 5.35 day orbit
+            - button "Inspect Transit" [ref=e522] [cursor=pointer]
+          - article [ref=e523]:
+            - generic [ref=e524]:
+              - heading "K00750.01" [level=3] [ref=e525]: K00750.01
+              - generic [ref=e527]: "SCORE: 100.0"
+            - paragraph [ref=e528]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e529]:
+              - generic [ref=e530]: Spectral K
+              - generic [ref=e531]: Subtle dip
+              - generic [ref=e532]: Mid orbit
+            - paragraph [ref=e533]: 21.68 day orbit
+            - button "Inspect Transit" [ref=e535] [cursor=pointer]
+          - article [ref=e536]:
+            - generic [ref=e537]:
+              - heading "K00751.01" [level=3] [ref=e538]: K00751.01
+              - generic [ref=e540]: "SCORE: 100.0"
+            - paragraph [ref=e541]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e542]:
+              - generic [ref=e543]: Spectral G
+              - generic [ref=e544]: Subtle dip
+              - generic [ref=e545]: Fast orbit
+            - paragraph [ref=e546]: 5.00 day orbit
+            - button "Inspect Transit" [ref=e548] [cursor=pointer]
+          - article [ref=e549]:
+            - generic [ref=e550]:
+              - heading "K00769.01" [level=3] [ref=e551]: K00769.01
+              - generic [ref=e553]: "SCORE: 100.0"
+            - paragraph [ref=e554]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e555]:
+              - generic [ref=e556]: Spectral G
+              - generic [ref=e557]: Subtle dip
+              - generic [ref=e558]: Fast orbit
+            - paragraph [ref=e559]: 4.28 day orbit
+            - button "Inspect Transit" [ref=e561] [cursor=pointer]
+          - article [ref=e562]:
+            - generic [ref=e563]:
+              - heading "K00773.01" [level=3] [ref=e564]: K00773.01
+              - generic [ref=e566]: "SCORE: 100.0"
+            - paragraph [ref=e567]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e568]:
+              - generic [ref=e569]: Spectral G
+              - generic [ref=e570]: Subtle dip
+              - generic [ref=e571]: Mid orbit
+            - paragraph [ref=e572]: 38.38 day orbit
+            - button "Inspect Transit" [ref=e574] [cursor=pointer]
+          - article [ref=e575]:
+            - generic [ref=e576]:
+              - heading "K00757.03" [level=3] [ref=e577]: K00757.03
+              - generic [ref=e579]: "SCORE: 100.0"
+            - paragraph [ref=e580]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e581]:
+              - generic [ref=e582]: Spectral K
+              - generic [ref=e583]: Subtle dip
+              - generic [ref=e584]: Fast orbit
+            - paragraph [ref=e585]: 6.25 day orbit
+            - button "Inspect Transit" [ref=e587] [cursor=pointer]
+          - article [ref=e588]:
+            - generic [ref=e589]:
+              - heading "K00758.01" [level=3] [ref=e590]: K00758.01
+              - generic [ref=e592]: "SCORE: 100.0"
+            - paragraph [ref=e593]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e594]:
+              - generic [ref=e595]: Spectral K
+              - generic [ref=e596]: Subtle dip
+              - generic [ref=e597]: Mid orbit
+            - paragraph [ref=e598]: 16.01 day orbit
+            - button "Inspect Transit" [ref=e600] [cursor=pointer]
+          - article [ref=e601]:
+            - generic [ref=e602]:
+              - heading "K00759.01" [level=3] [ref=e603]: K00759.01
+              - generic [ref=e605]: "SCORE: 100.0"
+            - paragraph [ref=e606]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e607]:
+              - generic [ref=e608]: Spectral G
+              - generic [ref=e609]: Subtle dip
+              - generic [ref=e610]: Mid orbit
+            - paragraph [ref=e611]: 32.63 day orbit
+            - button "Inspect Transit" [ref=e613] [cursor=pointer]
+          - article [ref=e614]:
+            - generic [ref=e615]:
+              - heading "K00760.01" [level=3] [ref=e616]: K00760.01
+              - generic [ref=e618]: "SCORE: 100.0"
+            - paragraph [ref=e619]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e620]:
+              - generic [ref=e621]: Spectral G
+              - generic [ref=e622]: Moderate dip
+              - generic [ref=e623]: Fast orbit
+            - paragraph [ref=e624]: 4.96 day orbit
+            - button "Inspect Transit" [ref=e626] [cursor=pointer]
+          - article [ref=e627]:
+            - generic [ref=e628]:
+              - heading "K00762.01" [level=3] [ref=e629]: K00762.01
+              - generic [ref=e631]: "SCORE: 100.0"
+            - paragraph [ref=e632]: CONFIRMED | Spectral F | Score 1.00 (A)
+            - generic [ref=e633]:
+              - generic [ref=e634]: Spectral F
+              - generic [ref=e635]: Subtle dip
+              - generic [ref=e636]: Fast orbit
+            - paragraph [ref=e637]: 4.50 day orbit
+            - button "Inspect Transit" [ref=e639] [cursor=pointer]
+          - article [ref=e640]:
+            - generic [ref=e641]:
+              - heading "K00115.01" [level=3] [ref=e642]: K00115.01
+              - generic [ref=e644]: "SCORE: 100.0"
+            - paragraph [ref=e645]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e646]:
+              - generic [ref=e647]: Spectral G
+              - generic [ref=e648]: Subtle dip
+              - generic [ref=e649]: Fast orbit
+            - paragraph [ref=e650]: 5.41 day orbit
+            - button "Inspect Transit" [ref=e652] [cursor=pointer]
+          - article [ref=e653]:
+            - generic [ref=e654]:
+              - heading "K00765.01" [level=3] [ref=e655]: K00765.01
+              - generic [ref=e657]: "SCORE: 100.0"
+            - paragraph [ref=e658]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e659]:
+              - generic [ref=e660]: Spectral G
+              - generic [ref=e661]: Subtle dip
+              - generic [ref=e662]: Fast orbit
+            - paragraph [ref=e663]: 8.35 day orbit
+            - button "Inspect Transit" [ref=e665] [cursor=pointer]
+          - article [ref=e666]:
+            - generic [ref=e667]:
+              - heading "K00766.01" [level=3] [ref=e668]: K00766.01
+              - generic [ref=e670]: "SCORE: 100.0"
+            - paragraph [ref=e671]: CONFIRMED | Spectral F | Score 1.00 (A)
+            - generic [ref=e672]:
+              - generic [ref=e673]: Spectral F
+              - generic [ref=e674]: Subtle dip
+              - generic [ref=e675]: Fast orbit
+            - paragraph [ref=e676]: 4.13 day orbit
+            - button "Inspect Transit" [ref=e678] [cursor=pointer]
+          - article [ref=e679]:
+            - generic [ref=e680]:
+              - heading "K00767.01" [level=3] [ref=e681]: K00767.01
+              - generic [ref=e683]: "SCORE: 100.0"
+            - paragraph [ref=e684]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e685]:
+              - generic [ref=e686]: Spectral G
+              - generic [ref=e687]: High-contrast dip
+              - generic [ref=e688]: Fast orbit
+            - paragraph [ref=e689]: 2.82 day orbit
+            - button "Inspect Transit" [ref=e691] [cursor=pointer]
+          - article [ref=e692]:
+            - generic [ref=e693]:
+              - heading "K00786.01" [level=3] [ref=e694]: K00786.01
+              - generic [ref=e696]: "SCORE: 100.0"
+            - paragraph [ref=e697]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e698]:
+              - generic [ref=e699]: Spectral G
+              - generic [ref=e700]: Subtle dip
+              - generic [ref=e701]: Fast orbit
+            - paragraph [ref=e702]: 3.69 day orbit
+            - button "Inspect Transit" [ref=e704] [cursor=pointer]
+          - article [ref=e705]:
+            - generic [ref=e706]:
+              - heading "K00787.01" [level=3] [ref=e707]: K00787.01
+              - generic [ref=e709]: "SCORE: 100.0"
+            - paragraph [ref=e710]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e711]:
+              - generic [ref=e712]: Spectral G
+              - generic [ref=e713]: Subtle dip
+              - generic [ref=e714]: Fast orbit
+            - paragraph [ref=e715]: 4.43 day orbit
+            - button "Inspect Transit" [ref=e717] [cursor=pointer]
+          - article [ref=e718]:
+            - generic [ref=e719]:
+              - heading "K00787.02" [level=3] [ref=e720]: K00787.02
+              - generic [ref=e722]: "SCORE: 100.0"
+            - paragraph [ref=e723]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e724]:
+              - generic [ref=e725]: Spectral G
+              - generic [ref=e726]: Subtle dip
+              - generic [ref=e727]: Mid orbit
+            - paragraph [ref=e728]: 11.38 day orbit
+            - button "Inspect Transit" [ref=e730] [cursor=pointer]
+          - article [ref=e731]:
+            - generic [ref=e732]:
+              - heading "K00788.01" [level=3] [ref=e733]: K00788.01
+              - generic [ref=e735]: "SCORE: 100.0"
+            - paragraph [ref=e736]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e737]:
+              - generic [ref=e738]: Spectral K
+              - generic [ref=e739]: Subtle dip
+              - generic [ref=e740]: Mid orbit
+            - paragraph [ref=e741]: 26.39 day orbit
+            - button "Inspect Transit" [ref=e743] [cursor=pointer]
+          - article [ref=e744]:
+            - generic [ref=e745]:
+              - heading "K00116.01" [level=3] [ref=e746]: K00116.01
+              - generic [ref=e748]: "SCORE: 100.0"
+            - paragraph [ref=e749]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e750]:
+              - generic [ref=e751]: Spectral G
+              - generic [ref=e752]: Subtle dip
+              - generic [ref=e753]: Mid orbit
+            - paragraph [ref=e754]: 13.57 day orbit
+            - button "Inspect Transit" [ref=e756] [cursor=pointer]
+          - article [ref=e757]:
+            - generic [ref=e758]:
+              - heading "K00115.02" [level=3] [ref=e759]: K00115.02
+              - generic [ref=e761]: "SCORE: 100.0"
+            - paragraph [ref=e762]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e763]:
+              - generic [ref=e764]: Spectral G
+              - generic [ref=e765]: Subtle dip
+              - generic [ref=e766]: Fast orbit
+            - paragraph [ref=e767]: 7.13 day orbit
+            - button "Inspect Transit" [ref=e769] [cursor=pointer]
+          - article [ref=e770]:
+            - generic [ref=e771]:
+              - heading "K00775.01" [level=3] [ref=e772]: K00775.01
+              - generic [ref=e774]: "SCORE: 100.0"
+            - paragraph [ref=e775]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e776]:
+              - generic [ref=e777]: Spectral K
+              - generic [ref=e778]: Subtle dip
+              - generic [ref=e779]: Mid orbit
+            - paragraph [ref=e780]: 16.38 day orbit
+            - button "Inspect Transit" [ref=e782] [cursor=pointer]
+          - article [ref=e783]:
+            - generic [ref=e784]:
+              - heading "K00775.02" [level=3] [ref=e785]: K00775.02
+              - generic [ref=e787]: "SCORE: 100.0"
+            - paragraph [ref=e788]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e789]:
+              - generic [ref=e790]: Spectral K
+              - generic [ref=e791]: Subtle dip
+              - generic [ref=e792]: Fast orbit
+            - paragraph [ref=e793]: 7.88 day orbit
+            - button "Inspect Transit" [ref=e795] [cursor=pointer]
+          - article [ref=e796]:
+            - generic [ref=e797]:
+              - heading "K00775.03" [level=3] [ref=e798]: K00775.03
+              - generic [ref=e800]: "SCORE: 100.0"
+            - paragraph [ref=e801]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e802]:
+              - generic [ref=e803]: Spectral K
+              - generic [ref=e804]: Subtle dip
+              - generic [ref=e805]: Mid orbit
+            - paragraph [ref=e806]: 36.45 day orbit
+            - button "Inspect Transit" [ref=e808] [cursor=pointer]
+          - article [ref=e809]:
+            - generic [ref=e810]:
+              - heading "K00776.01" [level=3] [ref=e811]: K00776.01
+              - generic [ref=e813]: "SCORE: 100.0"
+            - paragraph [ref=e814]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e815]:
+              - generic [ref=e816]: Spectral G
+              - generic [ref=e817]: Subtle dip
+              - generic [ref=e818]: Fast orbit
+            - paragraph [ref=e819]: 3.73 day orbit
+            - button "Inspect Transit" [ref=e821] [cursor=pointer]
+          - article [ref=e822]:
+            - generic [ref=e823]:
+              - heading "K00778.01" [level=3] [ref=e824]: K00778.01
+              - generic [ref=e826]: "SCORE: 100.0"
+            - paragraph [ref=e827]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e828]:
+              - generic [ref=e829]: Spectral K
+              - generic [ref=e830]: Subtle dip
+              - generic [ref=e831]: Fast orbit
+            - paragraph [ref=e832]: 2.24 day orbit
+            - button "Inspect Transit" [ref=e834] [cursor=pointer]
+          - article [ref=e835]:
+            - generic [ref=e836]:
+              - heading "K00780.01" [level=3] [ref=e837]: K00780.01
+              - generic [ref=e839]: "SCORE: 100.0"
+            - paragraph [ref=e840]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e841]:
+              - generic [ref=e842]: Spectral K
+              - generic [ref=e843]: Subtle dip
+              - generic [ref=e844]: Fast orbit
+            - paragraph [ref=e845]: 2.34 day orbit
+            - button "Inspect Transit" [ref=e847] [cursor=pointer]
+          - article [ref=e848]:
+            - generic [ref=e849]:
+              - heading "K00781.01" [level=3] [ref=e850]: K00781.01
+              - generic [ref=e852]: "SCORE: 100.0"
+            - paragraph [ref=e853]: CONFIRMED | Spectral M | Score 1.00 (A)
+            - generic [ref=e854]:
+              - generic [ref=e855]: Spectral M
+              - generic [ref=e856]: Subtle dip
+              - generic [ref=e857]: Mid orbit
+            - paragraph [ref=e858]: 11.60 day orbit
+            - button "Inspect Transit" [ref=e860] [cursor=pointer]
+          - article [ref=e861]:
+            - generic [ref=e862]:
+              - heading "K00782.01" [level=3] [ref=e863]: K00782.01
+              - generic [ref=e865]: "SCORE: 100.0"
+            - paragraph [ref=e866]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e867]:
+              - generic [ref=e868]: Spectral G
+              - generic [ref=e869]: Subtle dip
+              - generic [ref=e870]: Fast orbit
+            - paragraph [ref=e871]: 6.58 day orbit
+            - button "Inspect Transit" [ref=e873] [cursor=pointer]
+          - article [ref=e874]:
+            - generic [ref=e875]:
+              - heading "K00783.01" [level=3] [ref=e876]: K00783.01
+              - generic [ref=e878]: "SCORE: 100.0"
+            - paragraph [ref=e879]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e880]:
+              - generic [ref=e881]: Spectral G
+              - generic [ref=e882]: Subtle dip
+              - generic [ref=e883]: Fast orbit
+            - paragraph [ref=e884]: 7.28 day orbit
+            - button "Inspect Transit" [ref=e886] [cursor=pointer]
+          - article [ref=e887]:
+            - generic [ref=e888]:
+              - heading "K00784.01" [level=3] [ref=e889]: K00784.01
+              - generic [ref=e891]: "SCORE: 100.0"
+            - paragraph [ref=e892]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e893]:
+              - generic [ref=e894]: Spectral K
+              - generic [ref=e895]: Subtle dip
+              - generic [ref=e896]: Mid orbit
+            - paragraph [ref=e897]: 19.27 day orbit
+            - button "Inspect Transit" [ref=e899] [cursor=pointer]
+          - article [ref=e900]:
+            - generic [ref=e901]:
+              - heading "K00784.02" [level=3] [ref=e902]: K00784.02
+              - generic [ref=e904]: "SCORE: 100.0"
+            - paragraph [ref=e905]: CONFIRMED | Spectral K | Score 1.00 (A)
+            - generic [ref=e906]:
+              - generic [ref=e907]: Spectral K
+              - generic [ref=e908]: Subtle dip
+              - generic [ref=e909]: Mid orbit
+            - paragraph [ref=e910]: 10.07 day orbit
+            - button "Inspect Transit" [ref=e912] [cursor=pointer]
+          - article [ref=e913]:
+            - generic [ref=e914]:
+              - heading "K00785.01" [level=3] [ref=e915]: K00785.01
+              - generic [ref=e917]: "SCORE: 100.0"
+            - paragraph [ref=e918]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e919]:
+              - generic [ref=e920]: Spectral G
+              - generic [ref=e921]: Subtle dip
+              - generic [ref=e922]: Mid orbit
+            - paragraph [ref=e923]: 12.39 day orbit
+            - button "Inspect Transit" [ref=e925] [cursor=pointer]
+          - article [ref=e926]:
+            - generic [ref=e927]:
+              - heading "K00800.01" [level=3] [ref=e928]: K00800.01
+              - generic [ref=e930]: "SCORE: 100.0"
+            - paragraph [ref=e931]: CONFIRMED | Spectral F | Score 1.00 (A)
+            - generic [ref=e932]:
+              - generic [ref=e933]: Spectral F
+              - generic [ref=e934]: Subtle dip
+              - generic [ref=e935]: Fast orbit
+            - paragraph [ref=e936]: 2.71 day orbit
+            - button "Inspect Transit" [ref=e938] [cursor=pointer]
+          - article [ref=e939]:
+            - generic [ref=e940]:
+              - heading "K00800.02" [level=3] [ref=e941]: K00800.02
+              - generic [ref=e943]: "SCORE: 100.0"
+            - paragraph [ref=e944]: CONFIRMED | Spectral F | Score 1.00 (A)
+            - generic [ref=e945]:
+              - generic [ref=e946]: Spectral F
+              - generic [ref=e947]: Subtle dip
+              - generic [ref=e948]: Fast orbit
+            - paragraph [ref=e949]: 7.21 day orbit
+            - button "Inspect Transit" [ref=e951] [cursor=pointer]
+          - article [ref=e952]:
+            - generic [ref=e953]:
+              - heading "K00790.01" [level=3] [ref=e954]: K00790.01
+              - generic [ref=e956]: "SCORE: 100.0"
+            - paragraph [ref=e957]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e958]:
+              - generic [ref=e959]: Spectral G
+              - generic [ref=e960]: Subtle dip
+              - generic [ref=e961]: Fast orbit
+            - paragraph [ref=e962]: 8.47 day orbit
+            - button "Inspect Transit" [ref=e964] [cursor=pointer]
+          - article [ref=e965]:
+            - generic [ref=e966]:
+              - heading "K00791.01" [level=3] [ref=e967]: K00791.01
+              - generic [ref=e969]: "SCORE: 100.0"
+            - paragraph [ref=e970]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e971]:
+              - generic [ref=e972]: Spectral G
+              - generic [ref=e973]: Subtle dip
+              - generic [ref=e974]: Mid orbit
+            - paragraph [ref=e975]: 12.61 day orbit
+            - button "Inspect Transit" [ref=e977] [cursor=pointer]
+          - article [ref=e978]:
+            - generic [ref=e979]:
+              - heading "K00794.01" [level=3] [ref=e980]: K00794.01
+              - generic [ref=e982]: "SCORE: 100.0"
+            - paragraph [ref=e983]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e984]:
+              - generic [ref=e985]: Spectral G
+              - generic [ref=e986]: Subtle dip
+              - generic [ref=e987]: Fast orbit
+            - paragraph [ref=e988]: 2.54 day orbit
+            - button "Inspect Transit" [ref=e990] [cursor=pointer]
+          - article [ref=e991]:
+            - generic [ref=e992]:
+              - heading "K00795.01" [level=3] [ref=e993]: K00795.01
+              - generic [ref=e995]: "SCORE: 100.0"
+            - paragraph [ref=e996]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e997]:
+              - generic [ref=e998]: Spectral G
+              - generic [ref=e999]: Subtle dip
+              - generic [ref=e1000]: Fast orbit
+            - paragraph [ref=e1001]: 6.77 day orbit
+            - button "Inspect Transit" [ref=e1003] [cursor=pointer]
+          - article [ref=e1004]:
+            - generic [ref=e1005]:
+              - heading "K00797.01" [level=3] [ref=e1006]: K00797.01
+              - generic [ref=e1008]: "SCORE: 100.0"
+            - paragraph [ref=e1009]: CANDIDATE | Spectral G | Score 1.00 (A)
+            - generic [ref=e1010]:
+              - generic [ref=e1011]: Spectral G
+              - generic [ref=e1012]: Subtle dip
+              - generic [ref=e1013]: Mid orbit
+            - paragraph [ref=e1014]: 10.18 day orbit
+            - button "Inspect Transit" [ref=e1016] [cursor=pointer]
+          - article [ref=e1017]:
+            - generic [ref=e1018]:
+              - heading "K00777.01" [level=3] [ref=e1019]: K00777.01
+              - generic [ref=e1021]: "SCORE: 99.9"
+            - paragraph [ref=e1022]: CANDIDATE | Spectral G | Score 1.00 (A)
+            - generic [ref=e1023]:
+              - generic [ref=e1024]: Spectral G
+              - generic [ref=e1025]: Subtle dip
+              - generic [ref=e1026]: Mid orbit
+            - paragraph [ref=e1027]: 40.42 day orbit
+            - button "Inspect Transit" [ref=e1029] [cursor=pointer]
+          - article [ref=e1030]:
+            - generic [ref=e1031]:
+              - heading "K00814.01" [level=3] [ref=e1032]: K00814.01
+              - generic [ref=e1034]: "SCORE: 99.9"
+            - paragraph [ref=e1035]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e1036]:
+              - generic [ref=e1037]: Spectral G
+              - generic [ref=e1038]: Subtle dip
+              - generic [ref=e1039]: Mid orbit
+            - paragraph [ref=e1040]: 22.37 day orbit
+            - button "Inspect Transit" [ref=e1042] [cursor=pointer]
+          - article [ref=e1043]:
+            - generic [ref=e1044]:
+              - heading "K00116.02" [level=3] [ref=e1045]: K00116.02
+              - generic [ref=e1047]: "SCORE: 99.8"
+            - paragraph [ref=e1048]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e1049]:
+              - generic [ref=e1050]: Spectral G
+              - generic [ref=e1051]: Subtle dip
+              - generic [ref=e1052]: Mid orbit
+            - paragraph [ref=e1053]: 43.84 day orbit
+            - button "Inspect Transit" [ref=e1055] [cursor=pointer]
+          - article [ref=e1056]:
+            - generic [ref=e1057]:
+              - heading "K00764.01" [level=3] [ref=e1058]: K00764.01
+              - generic [ref=e1060]: "SCORE: 99.8"
+            - paragraph [ref=e1061]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e1062]:
+              - generic [ref=e1063]: Spectral G
+              - generic [ref=e1064]: Subtle dip
+              - generic [ref=e1065]: Mid orbit
+            - paragraph [ref=e1066]: 41.44 day orbit
+            - button "Inspect Transit" [ref=e1068] [cursor=pointer]
+          - article [ref=e1069]:
+            - generic [ref=e1070]:
+              - heading "K00010.01" [level=3] [ref=e1071]: K00010.01
+              - generic [ref=e1073]: "SCORE: 99.8"
+            - paragraph [ref=e1074]: CONFIRMED | Spectral F | Score 1.00 (A)
+            - generic [ref=e1075]:
+              - generic [ref=e1076]: Spectral F
+              - generic [ref=e1077]: Moderate dip
+              - generic [ref=e1078]: Fast orbit
+            - paragraph [ref=e1079]: 3.52 day orbit
+            - button "Inspect Transit" [ref=e1081] [cursor=pointer]
+          - article [ref=e1082]:
+            - generic [ref=e1083]:
+              - heading "K00829.02" [level=3] [ref=e1084]: K00829.02
+              - generic [ref=e1086]: "SCORE: 99.8"
+            - paragraph [ref=e1087]: CONFIRMED | Spectral G | Score 1.00 (A)
+            - generic [ref=e1088]:
+              - generic [ref=e1089]: Spectral G
+              - generic [ref=e1090]: Subtle dip
+              - generic [ref=e1091]: Fast orbit
+            - paragraph [ref=e1092]: 9.75 day orbit
+            - button "Inspect Transit" [ref=e1094] [cursor=pointer]
+          - article [ref=e1095]:
+            - generic [ref=e1096]:
+              - heading "K00817.02" [level=3] [ref=e1097]: K00817.02
+              - generic [ref=e1099]: "SCORE: 99.5"
+            - paragraph [ref=e1100]: CONFIRMED | Spectral K | Score 0.99 (A)
+            - generic [ref=e1101]:
+              - generic [ref=e1102]: Spectral K
+              - generic [ref=e1103]: Subtle dip
+              - generic [ref=e1104]: Fast orbit
+            - paragraph [ref=e1105]: 8.30 day orbit
+            - button "Inspect Transit" [ref=e1107] [cursor=pointer]
+          - article [ref=e1108]:
+            - generic [ref=e1109]:
+              - heading "K00812.04" [level=3] [ref=e1110]: K00812.04
+              - generic [ref=e1112]: "SCORE: 99.4"
+            - paragraph [ref=e1113]: CONFIRMED | Spectral K | Score 0.99 (A)
+            - generic [ref=e1114]:
+              - generic [ref=e1115]: Spectral K
+              - generic [ref=e1116]: Subtle dip
+              - generic [ref=e1117]: Fast orbit
+            - paragraph [ref=e1118]: 7.83 day orbit
+            - button "Inspect Transit" [ref=e1120] [cursor=pointer]
+          - article [ref=e1121]:
+            - generic [ref=e1122]:
+              - heading "K00780.02" [level=3] [ref=e1123]: K00780.02
+              - generic [ref=e1125]: "SCORE: 99.3"
+            - paragraph [ref=e1126]: CANDIDATE | Spectral K | Score 0.99 (A)
+            - generic [ref=e1127]:
+              - generic [ref=e1128]: Spectral K
+              - generic [ref=e1129]: Subtle dip
+              - generic [ref=e1130]: Fast orbit
+            - paragraph [ref=e1131]: 7.24 day orbit
+            - button "Inspect Transit" [ref=e1133] [cursor=pointer]
+          - article [ref=e1134]:
+            - generic [ref=e1135]:
+              - heading "K00756.03" [level=3] [ref=e1136]: K00756.03
+              - generic [ref=e1138]: "SCORE: 99.2"
+            - paragraph [ref=e1139]: CONFIRMED | Spectral F | Score 0.99 (A)
+            - generic [ref=e1140]:
+              - generic [ref=e1141]: Spectral F
+              - generic [ref=e1142]: Subtle dip
+              - generic [ref=e1143]: Fast orbit
+            - paragraph [ref=e1144]: 2.57 day orbit
+            - button "Inspect Transit" [ref=e1146] [cursor=pointer]
+          - article [ref=e1147]:
+            - generic [ref=e1148]:
+              - heading "K00757.02" [level=3] [ref=e1149]: K00757.02
+              - generic [ref=e1151]: "SCORE: 99.2"
+            - paragraph [ref=e1152]: CONFIRMED | Spectral K | Score 0.99 (A)
+            - generic [ref=e1153]:
+              - generic [ref=e1154]: Spectral K
+              - generic [ref=e1155]: Subtle dip
+              - generic [ref=e1156]: Mid orbit
+            - paragraph [ref=e1157]: 41.20 day orbit
+            - button "Inspect Transit" [ref=e1159] [cursor=pointer]
+        - complementary [ref=e1160]:
+          - heading "Mission Insights" [level=3] [ref=e1161]
+          - paragraph [ref=e1164]: Instead of only showing stars, this panel explains what the dataset is saying.
+          - list [ref=e1165]:
+            - listitem [ref=e1166]:
+              - strong [ref=e1167]: "Insight:"
+              - text: 83 confirmed, 8 candidates, 29 false positives.
+            - listitem [ref=e1168]:
+              - strong [ref=e1169]: "Insight:"
+              - text: 19 KOIs have very deep transits (> 10,000 ppm), which are easy to detect but often need stronger validation.
+            - listitem [ref=e1170]:
+              - strong [ref=e1171]: "Insight:"
+              - text: "Median signal profile: 1155 ppm depth, 3.27 h duration, 8.11 day period."
+            - listitem [ref=e1172]:
+              - strong [ref=e1173]: "Insight:"
+              - text: 23 hotter worlds (>= 1200 K) vs 16 cooler worlds (<= 450 K), showing discovery bias toward easier signals.
+          - generic [ref=e1174]:
+            - paragraph [ref=e1175]:
+              - strong [ref=e1176]: "Discovery pacing:"
+              - text: period distribution in selected dataset.
+            - img [ref=e1178]:
+              - generic [ref=e1179]:
+                - generic [ref=e1187]:
+                  - generic [ref=e1190]: 0d
+                  - generic [ref=e1192]: 1d
+                  - generic [ref=e1194]: 10d
+                  - generic [ref=e1196]: 100d
+                  - generic [ref=e1198]: 316d
+                - generic [ref=e1199]:
+                  - generic [ref=e1202]: "0"
+                  - generic [ref=e1204]: "10"
+                  - generic [ref=e1206]: "20"
+                  - generic [ref=e1208]: "30"
+                  - generic [ref=e1210]: "40"
+                  - generic [ref=e1212]: "50"
+          - generic [ref=e1213]:
+            - paragraph [ref=e1214]:
+              - strong [ref=e1215]: "Top discovery picks:"
+              - text: high-score KOIs ready to inspect.
+            - generic [ref=e1216]:
+              - generic [ref=e1217]:
+                - generic [ref=e1218]:
+                  - strong [ref=e1219]: "#1 K00812.02"
+                  - text: CONFIRMED | score 1.00
+                - button "Inspect" [ref=e1220] [cursor=pointer]
+              - generic [ref=e1221]:
+                - generic [ref=e1222]:
+                  - strong [ref=e1223]: "#2 K00812.03"
+                  - text: CONFIRMED | score 1.00
+                - button "Inspect" [ref=e1224] [cursor=pointer]
+              - generic [ref=e1225]:
+                - generic [ref=e1226]:
+                  - strong [ref=e1227]: "#3 K00813.01"
+                  - text: CONFIRMED | score 1.00
+                - button "Inspect" [ref=e1228] [cursor=pointer]
+              - generic [ref=e1229]:
+                - generic [ref=e1230]:
+                  - strong [ref=e1231]: "#4 K00801.01"
+                  - text: CONFIRMED | score 1.00
+                - button "Inspect" [ref=e1232] [cursor=pointer]
+              - generic [ref=e1233]:
+                - generic [ref=e1234]:
+                  - strong [ref=e1235]: "#5 K00802.01"
+                  - text: CANDIDATE | score 1.00
+                - button "Inspect" [ref=e1236] [cursor=pointer]
+      - button "Back" [ref=e1238] [cursor=pointer]
+  - generic [ref=e86]:
+    - generic [ref=e87]: "Source: NASA Kepler Data v4.2"
+    - generic [ref=e88]: Documentation
+    - generic [ref=e89]: Support
+    - generic [ref=e90]: Legal
