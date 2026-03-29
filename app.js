@@ -302,6 +302,7 @@ function transitionTo(nextScreen, { syncHash = true } = {}) {
 
   state.activeScreen = nextScreen;
   renderScreens();
+  window.scrollTo({ top: 0, behavior: 'instant' });
   if (syncHash) {
     syncRouteFromScreen(nextScreen);
   }

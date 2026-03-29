@@ -155,6 +155,7 @@ h1, h2, h3 {
 .screen-stack {
   position: relative;
   display: grid;
+  overflow: hidden;
 }
 
 .screen {
